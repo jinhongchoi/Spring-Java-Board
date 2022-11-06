@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<!-- DB 테이블과 컬럼들을 mapper에 매핑을 위한 변수 선언
+		유지보수를 편하게 하기 위해서 xml을 따로 선언함-->
+	<properties>
+		<!--
+			* property
+			- name : mapper.xml에서 사용될 이름 -> 이건 카멜 명명법사용
+			- value : DB테이블 및 컬럼 이름 -> 이건 underscore 명명볍
+		  -->
+		  
+		  <property name="tbl_member" value="tbl_member"/>
+		  <property name="userId" value="user_id"/>
+		  <property name="userName" value="user_name"/>
+		  <property name="money" value="money"/>	  
+		  
+		  <property name="tbl_event" value="tbl_event"/>
+		  <property name="eventId" value="event_id"/>
+		  <property name="eventName" value="event_name"/>
+		  <property name="eventPrice" value="event_price"/>
+		  <property name="eventDesc" value="event_desc"/>
+		  <property name="eventUrl" value="event_url"/>
+		  
+		  <property name="tbl_ecart" value="tbl_ecart"/>
+		  <property name="ecartId" value="ecart_id"/>
+		  <property name="userId" value="user_id"/>
+		  <property name="eventId" value="event_id"/>		  
+		  
+		  <property name="tbl_cart" value="tbl_cart"/>
+		  <property name="cartId" value="cart_id"/>
+		  <property name="userId" value="user_id"/>
+		  <property name="productId" value="product_id"/>
+		  <property name="amount" value="amount"/>
+		  
+		  <property name="tbl_pay" value="tbl_pay"/>
+		  <property name="payId" value="pay_id"/>
+		  <property name="payName" value="pay_name"/>
+		  <property name="payPrice" value="pay_price"/>
+		  <property name="payTool" value="pay_tool"/>
+		  <property name="userId" value="user_id"/>
+		  <property name="userTell" value="user_tell"/>
+		  		  
+		  <property name="tbl_product" value="tbl_product"/>
+		  <property name="productId" value="product_id"/>
+		  <property name="productName" value="product_name"/>
+		  <property name="productPrice" value="product_price"/>
+		  <property name="productDesc" value="product_desc"/>
+		  <property name="productUrl" value="product_url"/>
+		  <property name="productCate" value="product_cate"/>
+		  
+	</properties>
+	
+		<!-- underscore 명명법을 camel 명명법으로 변환이 가능하도록 세팅 -->
+		<settings>
+			<setting name="mapUnderscoreToCamelCase" value="true"/>
+		</settings>
+		
+		<!-- typeAliases : mapper.xml의 select 리턴 타입에 들어갈 클래스 경로를 설정 
+		 -> BoardVO를 부를 경우 누군가 경로를 바꿀 수 있기 때문에 여기다가 지정해 놓음
+		 -->
+		 		 
+		 <typeAliases>
+		 	<package name="edu.spring.ex10.domain"/>
+		 </typeAliases>
+	
+</configuration>
+
+
+
+
+
+
+
+
+
+
+
+
