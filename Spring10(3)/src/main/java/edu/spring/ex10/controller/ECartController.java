@@ -23,71 +23,39 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import edu.spring.ex10.domain.CartVO;
-import edu.spring.ex10.service.CartService;
+import edu.spring.ex10.domain.ECartVO;
+import edu.spring.ex10.service.ECartService;
 import edu.spring.ex10.util.MediaUtil;
 
 @Controller
-@RequestMapping(value="/cart")
-public class CartController {
+@RequestMapping(value="/ecart")
+public class ECartController {
 	
-	@GetMapping("/cart")
+	@GetMapping("/ecart")
 	public void cart() {
 		
 	}
 	private static final Logger logger =
-			LoggerFactory.getLogger(CartController.class);
+			LoggerFactory.getLogger(ECartController.class);
 	
 	@Autowired
-	private CartService cartservice;
+	private ECartService ecartservice;
 	
 	@Resource(name="uploadPath")
 	private String uploadPath;
-//	
-//	@GetMapping("/cartinsert")
-//	public void insertGET() {
-//		logger.info("-----------insertGET()호출-----------");
-//	}//end registerGET()
-//	
-//	@PostMapping("/cartinsert")
-//	public String insertPOST(CartVO vo, HttpSession session) {
-//		// RedirectAttributes
-//		// - 새로운 경로 위치에 속성값을 전송하는 객체
-//		logger.info("-----------insertPOST()호출-----------");
-//		logger.info(vo.toString());
-//		
-//		String userId=(String)session.getAttribute("userId");
-//		vo.setUserId(userId);
-//		// 장바구니에 기존 상품이 있는지 검사
-//		int count = cartservice.countCart(vo.getProductId(), userId)
-//		==0 ? cartservice.updateCart(vo) : cartservice.create(vo);
-//		
-//		if(count ==0) {
-//			// 없으면 insert
-//			cartservice.create(vo);
-//		}else {
-//			// 있으면 update
-//			cartservice.updateCart(vo);
-//		}		
-//		
-//		return "redirect:/cart/list";
-//		
-//	}//end registerPOST()
-//	
-	@GetMapping("/cartlist")
+	
+	@GetMapping("/ecartlist")
 	// model 과 modelAndView 와 차이점은 리턴값을 어떻게 표기하냐의 차이가 있다!
 	// 강의 시간의 배운 방식과 표기법은 model이므로 헷갈리지않게 model 사용!
 	public void list(HttpSession session, Model model) {
-		logger.info("-----------cartlist()호출-----------");
+		logger.info("-----------ecartlist()호출-----------");
 //		String userId=(String)session.getAttribute("userId");
 		String userId="1";
 		Map<String, Object>map = new HashMap<String, Object>();
-		List<CartVO>list = cartservice.readCart(userId); //장바구니 정보
-		int sumMoney = cartservice.sumMoney(userId);
-		
+		List<ECartVO>list = ecartservice.readECart(userId);
+				
 		map.put("list", list);
-		map.put("count", list.size());
-		map.put("sumMoney", sumMoney);
+		map.put("count", list.size());		
 		
 		model.addAttribute("map", map);
 		
@@ -96,43 +64,20 @@ public class CartController {
 	
 	
 	@PostMapping("/delete")
-	public String delete(int cartId, RedirectAttributes reAttr) {
-		logger.info("-----------delete()호출: cartId = "+cartId+"-----------");
-		int result=cartservice.delete(cartId);
+	public String delete(int ecartId, RedirectAttributes reAttr, Model model) {
+		logger.info("-----------delete()호출: ecartId = "+ecartId+"-----------");
+		int result=ecartservice.delete(ecartId);
 		if(result==1) {
 			reAttr.addFlashAttribute("delete_result", "success"); 
-			
-			return "redirect:/cart/cartlist";
+			model.addAttribute("msg", "삭제 성공");
+			return "redirect:/ecart/ecartlist";
 			// reAttr.addFlashAttribute("insert_result", "success");  alert띄우고 싶으면 insert 부분 참고!
 			// 설정된 값들의 경로가 list로 가기때문에 list.jsp에 관련 jquery를 작성한다  
 		}else {
-			return "redirect:/cart/cartlist";
+			model.addAttribute("msg", "삭제 실패");
+			return "redirect:/ecart/ecartlist";
 		}
 	}//end delete
-	
-	@GetMapping("/update") // 일단 페이지가 필요해서 get으로 가져옴
-	public void updateGET() {
-		logger.info("-----------updateGET()호출----------");		
-		
-	}//end updateGET
-	
-	@PostMapping("/update")
-	public String updatePOST(int[]amount, int[]productId, HttpSession session) {
-		logger.info("-----------updatePOST()호출-----------");
-		String userId= (String) session.getAttribute("userId");
-		userId="1";
-		
-		CartVO vo= new CartVO(); //이걸 선언하고 for문으로 다시 담는다!
-		for(int i=0; i<productId.length; i++) {
-			vo.setUserId(userId);
-			vo.setAmount(amount[i]);
-			vo.setProductId(productId[i]);
-			cartservice.update(vo);
-		}
-		
-		return "redirect:/cart/cartlist";
-		
-	}//end updatePOST
 	
 	@GetMapping("/display")
 	public ResponseEntity<byte[]>display(String fileName)throws Exception{
@@ -164,15 +109,3 @@ public class CartController {
 	
 	
 }
-
-
-
-
-
-
-
-
-
-
-
-

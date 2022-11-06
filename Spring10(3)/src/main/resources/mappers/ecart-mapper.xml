@@ -3,34 +3,33 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="edu.spring.ex10.CartMapper">
+<mapper namespace="edu.spring.ex10.ECartMapper">
 
 	<!--여러개의 insert 있을 시구분하기 위해 id 필요  -->
 	 <insert id="insert">  
-		insert into ${tbl_cart}(${userId}, ${productId}, ${amount}
+		insert into ${tbl_ecart}(${userId}, ${eventId}
 		) values(
-			#{userId}, #{productId}, #{amount}
+			#{userId}, #{eventId}
 		)
 	 </insert> 
 	 
-	 <!-- 장바구니 목록  -->
-	 <select id="listCart" resultType="CartVO">
+	 <!-- 쿠폰 목록  -->
+	 <select id="listECart" resultType="ECartVO">
 	 	select
-	 		c.cart_id as cartId,
+	 		c.ecart_id as ecartId,
 	 		c.user_id as userId,
-	 		p.product_id as productId,
+	 		e.event_id as eventId,
 	 		m.user_name as userName,
-	 		p.product_name as productName,
-	 		p.product_url as productUrl,
-	 		c.amount,
-	 		p.product_price as productPrice,
-	 		(product_price * amount) money 
+	 		e.event_name as eventName,
+	 		e.event_url as eventUrl,	 		
+	 		e.event_price as eventPrice
+	 		<!--(product_price * amount) money  --> 
 	 	from 
-	 		tbl_member m, tbl_product p, tbl_cart c
+	 		tbl_member m, tbl_event e, tbl_ecart c
 	 	where m.user_id = c.user_id
-	 		and p.product_id = c.product_id
+	 		and e.event_id = c.event_id
 	 		and c.user_id = #{userId}	 	
-	 	order by c.cart_id
+	 	order by c.ecart_id
 	 </select>
 	 
 	 <!-- 장바구니 전체 금액  -->
@@ -42,28 +41,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 장바구니 수정  -->
 	<update id="update">
-		update tbl_cart
-		set ${amount} = #{amount}
+		update tbl_ecart		
 		where ${userId} = #{userId}
-		and ${productId} = #{productId}
+		and ${eventId} = #{eventId}
 	</update>
 	
-	<!-- 장바구니 삭제 -->
+	<!-- 쿠폰 삭제 -->
 	<delete id="delete">
-		delete from ${tbl_cart}
-		where ${cartId} = #{cartId}
+		delete from ${tbl_ecart}
+		where ${ecartId} = #{ecartId}
 	</delete>
 	
-	<!-- 장바구니에 동일한 상품 레코드 확인 -->
-	<select id="countCart" resultType="int">
+	<!-- 쿠폰에 동일한 상품 레코드 확인 -->
+	<select id="countECart" resultType="int">
 	 	select count(*)
-	 	from tbl_cart
+	 	from tbl_ecart
 	 	where user_id = #{userId}
-	 	and product_id = #{productId}	
+	 	and event_id = #{eventId}	
 	 </select>
 	
 	<!-- 장바구니 동일한 상품이 존재하면 수정  -->
-	<update id="updateCart">
+	<update id="updateECart">
 		update tbl_cart
 		set amount = amount + #{amount}
 		where user_id = #{userId}

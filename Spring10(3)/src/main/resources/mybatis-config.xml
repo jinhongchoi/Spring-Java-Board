@@ -16,13 +16,33 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		  <property name="tbl_member" value="tbl_member"/>
 		  <property name="userId" value="user_id"/>
 		  <property name="userName" value="user_name"/>
-		  <property name="money" value="money"/>		  
+		  <property name="money" value="money"/>	  
+		  
+		  <property name="tbl_event" value="tbl_event"/>
+		  <property name="eventId" value="event_id"/>
+		  <property name="eventName" value="event_name"/>
+		  <property name="eventPrice" value="event_price"/>
+		  <property name="eventDesc" value="event_desc"/>
+		  <property name="eventUrl" value="event_url"/>
+		  
+		  <property name="tbl_ecart" value="tbl_ecart"/>
+		  <property name="ecartId" value="ecart_id"/>
+		  <property name="userId" value="user_id"/>
+		  <property name="eventId" value="event_id"/>		  
 		  
 		  <property name="tbl_cart" value="tbl_cart"/>
 		  <property name="cartId" value="cart_id"/>
 		  <property name="userId" value="user_id"/>
 		  <property name="productId" value="product_id"/>
 		  <property name="amount" value="amount"/>
+		  
+		  <property name="tbl_pay" value="tbl_pay"/>
+		  <property name="payId" value="pay_id"/>
+		  <property name="payName" value="pay_name"/>
+		  <property name="payPrice" value="pay_price"/>
+		  <property name="payTool" value="pay_tool"/>
+		  <property name="userId" value="user_id"/>
+		  <property name="userTell" value="user_tell"/>
 		  		  
 		  <property name="tbl_product" value="tbl_product"/>
 		  <property name="productId" value="product_id"/>

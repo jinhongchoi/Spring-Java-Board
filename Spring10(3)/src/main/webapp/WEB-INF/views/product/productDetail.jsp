@@ -18,10 +18,14 @@
 	
 	<h2>상품 상세정보</h2>
 	<a href="productupdate?productId=${vo.productId }"><input type="button" value="상품 수정"></a>
+	<br>
+	<br>
 	<form action="productdelete" method="POST">
 			<input type="hidden" name="productId" value= "${vo.productId }">
 			<input type= "submit" value ="상품 삭제">
 	</form>	
+	<br>
+	
 	
 	<br>
 	<br>	
@@ -50,7 +54,7 @@
 					</tr>
 					<tr align="center">
 						<td colspan="2">	
-						<form name="form1" method="post" action = "/carts">
+						<form name="form1" method="post" >
 								<input type="hidden" id ="money" value="${vo.productPrice}">		
 								<input type="hidden" id ="productPrice" value="${vo.productPrice}">
 						        <input type="hidden" id ="productName" value="${vo.productName }">				
@@ -60,9 +64,18 @@
 										<option value="${i }">${i }</option>
 									</c:forEach>
 								</select>&nbsp;개
-								<button id="btn_cart" value="장바구니에 담기">장바구니에 담기</button>						
+								<button id="btn_cart" value="장바구니에 담기" type="button">장바구니에 담기</button>
+								<a type="button" href="../pay/paylist?productId=${vo.productId }&amount=${amount}" id="btn_pay">						
+									구매하기
+								</a>
+								
+								<!--type="button" 을 넣지 않으면  
+								Request method 'POST' not supported
+								이런 에러가 뜬다!
+								 -->						
 						</form>
-						<a type="button" href="carts/cartlist">장바구니 목록</a>
+						
+						<a type="button" href="../cart/cartlist">장바구니 목록</a>
 						<a href="productlist">상품목록</a>
 						</td>
 					</tr>

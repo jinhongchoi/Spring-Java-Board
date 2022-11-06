@@ -14,10 +14,13 @@ table, th, td{
 	text-align: center;
 	
 }
+input{
+	margin-right: 10px;
+}
 .drink{
   display: inline-flex;
   justify-content: right;
-  margin-left: 40px;
+  margin-left: 110px;
   margin-right: 40px;
   padding: 100px 100px 100px 100px; 
 }
@@ -30,6 +33,11 @@ table, th, td{
   margin-left: 250px;
   margin-right: 150px;	
 }
+a {
+  text-decoration: none;
+  active-color { color:#000; }
+}
+
 
 ul{
 	list-style-type: none;
@@ -39,23 +47,38 @@ ul{
 li{
 	display: inline-block;
 } /* 페이징 처리시 디자인  */
+
+.event{
+	float: right;
+	margin-right: 250px; 
+}
 	
 </style>
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
 
+<script>
+$("a").click(function() {
+    toggleClass(".active-color");
+});
+</script>
+
+
 <meta charset="UTF-8">
 <title>상품 목록</title>
-
-
 
 </head>
 <body>
 
 	<div class="Title">
-	<h3>상품목록</h3>	
-	<a href="productregister"><input type="button" value="상품등록하기"> </a>
+	<h3>상품목록</h3>
+	<h3><a href="../event/eventlist" class="event" style="color: black">EVENT LIST</a></h3>
+	<br>
+	<h3><a href="../pay/paylistDetail" class="event" style="color: black">결제 목록</a></h3>		
+		
+	<a href="productregister"><input type="button" value="상품등록하기"></a>
+	<a href="../cart/cartlist"><input type="button" value="장바구니로 가기"> </a>
 	</div>
 	<br>	
 	<hr>
@@ -67,8 +90,8 @@ li{
            
 		<br>
 		<div class="shop">
-		<c:forEach var="vo" items="${listProduct }" begin="0" end="2">
 		
+		<c:forEach var="vo" items="${listProduct }" begin="0" end="2">
 		<c:if test="${vo.productCate eq '팝콘' }" >
 		
 			<ol class="drink">
@@ -87,15 +110,13 @@ li{
 					<Strong> 상품 가격: <fmt:formatNumber value="${vo.productPrice}" pattern="###,###,###"/>
 					</Strong>
         			<br>
-        			<Strong> 상품 종류: ${vo.productCate }</Strong>         	      			
-		
+        			<Strong> 상품 종류: ${vo.productCate }</Strong>		
 				</li> 
-			</ol>
-			
+			</ol>	
 		</c:if>
-						
-		</c:forEach>
 		
+		</c:forEach>
+	
 		<br>
 		</div>
 		
@@ -133,7 +154,8 @@ li{
 				</li> 
 			</ol>
 			
-		</c:if>					
+		</c:if>		
+					
 		</c:forEach>
 		</div>
 		<br>
@@ -165,12 +187,12 @@ li{
 					<Strong> 상품 가격: <fmt:formatNumber value="${vo.productPrice}" pattern="###,###,###"/>
 					</Strong>
         			<br>
-        			<Strong> 상품 종류: ${vo.productCate }</Strong> 
-        	      			
+        			<Strong> 상품 종류: ${vo.productCate }</Strong>         	      			
 		
 				</li> 
 			</ol>
-		</c:if>					
+		</c:if>		
+					
 		</c:forEach>
 		</div>
 	
