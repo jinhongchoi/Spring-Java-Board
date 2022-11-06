@@ -1,0 +1,14 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<style>
+.footer {
+	text-align: center;
+	height: 60px;
+}
+</style>
+<div class="footer" style="font-size: 12px;">
+	<span>이용약관 | 생각을 하자 | </span>
+	<div>© 구트Academy Corp.</div>
+</div>
+
+
