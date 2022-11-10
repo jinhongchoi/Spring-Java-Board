@@ -90,21 +90,23 @@ $("a").click(function() {
 			<th>상품</th>
 			<th>결제금액</th>
 		</tr>
-		<c:forEach var="vo" items="${map2.listDetail }">
+		<c:forEach items="${listPayDetail}" var="listPayDetail">
+		
 		<tr>
 			<td>			
-				${vo.payId }
+				${listPayDetail.payDetailNum }
 			</td>
 			<td>
-				${vo.productName }
+				${listPayDetail.productName }
 			</td>
 			<td>
-				<img src="display?fileName=/${vo.productUrl }" width="200px" height="150px">
+				<img src="display?fileName=/${listPayDetail.productUrl }" width="200px" height="150px">
 			</td>
 			<td>
-				${vo.productPrice }
+				${listPayDetail.money }
 			</td>
 		</tr>		
+		
 		</c:forEach>
 	</table>		
 

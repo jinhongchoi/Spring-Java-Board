@@ -14,6 +14,7 @@ public class ProductVO {
 	private String productPhoto ;
 	private String productCate;
 	
+	
 	public ProductVO() {
 		
 	}// 기본 생성자

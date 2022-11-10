@@ -9,6 +9,19 @@
 <html>
 <head>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script type="text/javascript">
+	
+/* 	$(document).ready(function () {
+		//리스트 페이지로 이동
+		$('#btn_pay').click(function () {
+			location.href=href="../pay/paylist2";
+		});// end btnList
+			
+	});//end document */
+	
+</script>
+
 <meta charset="UTF-8">
 <title>상품 상세정보</title>
 </head>
@@ -29,13 +42,13 @@
 	
 	<br>
 	<br>	
+	<form name="form1" method="post" action="../cart/cartinsert">
 	<table border="1">
 		<tr>
 			<td>
 				<img src="display?fileName=/${vo.productUrl }" width="340px" height="300px">
 			</td>
 			<td>
-				
 				<table border="1" style="height: 300px; width: 400px">
 					<tr align="center">				
 						<td>상품명</td>						
@@ -54,29 +67,26 @@
 					</tr>
 					<tr align="center">
 						<td colspan="2">	
-						<form name="form1" method="post" >
+						
 								<input type="hidden" id ="money" value="${vo.productPrice}">		
 								<input type="hidden" id ="productPrice" value="${vo.productPrice}">
 						        <input type="hidden" id ="productName" value="${vo.productName }">				
 								<input type="hidden" id ="productId" value="${vo.productId }">
 								<select id  ="amount">
-									<c:forEach begin="1" end="10" var="i">
+									<c:forEach begin="1" end="10" var="i" varStatus="status">
+										console.log(status);
+										console.log(status.count);
+										console.log(2);
 										<option value="${i }">${i }</option>
 									</c:forEach>
 								</select>&nbsp;개
+								<input type="hidden" id ="amount" value="">
 								<button id="btn_cart" value="장바구니에 담기" type="button">장바구니에 담기</button>
-								<a type="button" href="../pay/paylist?productId=${vo.productId }&amount=${amount}" id="btn_pay">						
-									구매하기
-								</a>
-								
+																
 								<!--type="button" 을 넣지 않으면  
 								Request method 'POST' not supported
-								이런 에러가 뜬다!
-								 -->						
-						</form>
+								이런 에러가 뜬다! -->						
 						
-						<a type="button" href="../cart/cartlist">장바구니 목록</a>
-						<a href="productlist">상품목록</a>
 						</td>
 					</tr>
 				</table>
@@ -84,6 +94,10 @@
 		
 		</tr>
 	</table>
+		
+	</form>
+	<a type="button" href="../cart/cartlist">장바구니 목록</a>
+	<a href="productlist">상품목록</a>
 	
 	<script type="text/javascript">
 		

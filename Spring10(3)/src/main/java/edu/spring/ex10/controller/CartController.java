@@ -49,30 +49,26 @@ public class CartController {
 //		logger.info("-----------insertGET()호출-----------");
 //	}//end registerGET()
 //	
-//	@PostMapping("/cartinsert")
-//	public String insertPOST(CartVO vo, HttpSession session) {
-//		// RedirectAttributes
-//		// - 새로운 경로 위치에 속성값을 전송하는 객체
-//		logger.info("-----------insertPOST()호출-----------");
-//		logger.info(vo.toString());
-//		
-//		String userId=(String)session.getAttribute("userId");
-//		vo.setUserId(userId);
-//		// 장바구니에 기존 상품이 있는지 검사
-//		int count = cartservice.countCart(vo.getProductId(), userId)
-//		==0 ? cartservice.updateCart(vo) : cartservice.create(vo);
-//		
-//		if(count ==0) {
-//			// 없으면 insert
-//			cartservice.create(vo);
-//		}else {
-//			// 있으면 update
-//			cartservice.updateCart(vo);
-//		}		
-//		
-//		return "redirect:/cart/list";
-//		
-//	}//end registerPOST()
+	@PostMapping("/cartinsert")
+	public String insertPOST(CartVO vo, HttpSession session) {
+		// RedirectAttributes
+		// - 새로운 경로 위치에 속성값을 전송하는 객체
+		logger.info("-----------insertPOST()호출-----------");
+		logger.info(vo.toString());
+		
+		String userId="1";
+		vo.setUserId(userId);
+		// 장바구니에 기존 상품이 있는지 검사
+		int result= 0;
+	
+			result=cartservice.create(vo);
+		
+			
+			
+		
+		return "redirect:/cart/cartlist";
+		
+	}//end registerPOST()
 //	
 	@GetMapping("/cartlist")
 	// model 과 modelAndView 와 차이점은 리턴값을 어떻게 표기하냐의 차이가 있다!

@@ -1,5 +1,7 @@
 package edu.spring.ex10.controller;
 
+
+
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.HashMap;
@@ -7,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.IOUtils;
@@ -25,6 +28,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 import edu.spring.ex10.domain.CartVO;
+import edu.spring.ex10.domain.PayDetailVO;
+import edu.spring.ex10.domain.PayProductVO;
 import edu.spring.ex10.domain.PayVO;
 import edu.spring.ex10.domain.ProductVO;
 import edu.spring.ex10.service.CartService;
@@ -58,21 +63,39 @@ public class PayController {
 	}//end registerGET()
 	
 	@PostMapping("/payinsert")
-	public String payinsertPOST(PayVO vo, RedirectAttributes reAttr) {
+	public String payinsertPOST(PayVO vo,PayDetailVO vo2, RedirectAttributes reAttr) {
 		// RedirectAttributes
 		// - 새로운 경로 위치에 속성값을 전송하는 객체
 		logger.info("-----------payinsertPOST()호출-----------");
 		logger.info(vo.toString());
-		int result= payservice.create(vo);
+//		int result= payservice.create(vo);
+		int result=payservice.create2(vo2);
 		logger.info(result+ "행 삽입");
-		if(result==1) {
-			reAttr.addFlashAttribute("insert_result", "success");  // 왜 안뜰까?
-			// insert_result가 list.jsp로 가고 success라는 문구가 jsp에 전달되면 jsp에서 처리함
-			return "redirect:../pay/paylistDetail"; // /pay/paylistDetail 경로로 이동. get 방식
-		}else {
-			return "redirect:/pay/payinsert";
-		}
 		
+		return "redirect:../pay/paylistDetail";
+				
+	}//end registerPOST()
+	
+	@PostMapping("/payinsert2")
+	public String payinsert2POST(PayVO vo, RedirectAttributes reAttr) {
+		// RedirectAttributes
+		// - 새로운 경로 위치에 속성값을 전송하는 객체
+		String userId="1";
+		String userName="1";
+		String userTell="1";
+		logger.info("-----------payinsert2POST()호출-----------");
+		logger.info(vo.toString());
+		vo.setUserId(userId);
+		vo.setUserTell(userTell);
+		vo.setUserName(userName);
+		// 위에 3개 jsp에서 받는거로 수정!
+		
+//		int result= payservice.create(vo);
+		int result=payservice.create(vo);
+		logger.info(result+ "행 삽입");
+		
+		return "redirect:../pay/paylistDetail";
+				
 	}//end registerPOST()
 	
 	
@@ -90,44 +113,51 @@ public class PayController {
 		map.put("list", list);
 		map.put("count", list.size());
 		map.put("sumMoney", sumMoney);
-		
+				
 		model.addAttribute("map", map);		
 		
 		
-//		logger.info("-----------detail()호출: productId= " + productId +"-----------");
-//		logger.info("-----------detail()호출: amount= " + amount +"-----------");
-//		Map<String, Object>map2 = new HashMap<String, Object>();
-//		ProductVO vo = payservice.detailProduct(productId);
-//		map2.put("voId", vo.getProductId());
-//		map2.put("voName", vo.getProductName());
-//		map2.put("voUrl", vo.getProductUrl());
-//		map2.put("voPrice", vo.getProductPrice());		
-//		map2.put("amount", amount);
-//		map2.put("voTotal", amount*vo.getProductPrice());
-//		model.addAttribute("map2", map2);
-		
-		// model을 이용해 jsp로 보낸다!
-		// 기존의 servlet 에서 request.setAttribute() 이거와 같음 -> request나 session과 같은 개념!
-		
 	}//end list
 	
-	
+	// 장바구니 결제목록
 	@GetMapping("/paylistDetail")
 	// model 과 modelAndView 와 차이점은 리턴값을 어떻게 표기하냐의 차이가 있다!
 	// 강의 시간의 배운 방식과 표기법은 model이므로 헷갈리지않게 model 사용!
-	public void listDetail(HttpSession session, Model model) {
-		logger.info("-----------paylistDetail()호출-----------");
+	public void listPayDetail(HttpSession session, Model model, PayDetailVO vo, Integer amount) {
+		logger.info("-----------paylist()호출-----------");
 //		String userId=(String)session.getAttribute("userId");
 		String userId="1";
-		Map<String, Object>map = new HashMap<String, Object>();
-		List<PayVO>listDetail = payservice.listPay(userId); //장바구니 정보
-				
-		map.put("listDetail", listDetail);
-		map.put("count", listDetail.size());		
+//		Map<String, Object>map = new HashMap<String, Object>();
+//		List<CartVO>list = payservice.readCart(userId); //장바구니 정보
 		
-		model.addAttribute("map2", map);		
+		vo.setUserId(userId);
+		
+		List<PayDetailVO>listPayDetail=payservice.listPayDetail(vo);
+		model.addAttribute("listPayDetail", listPayDetail);		
+		
+		payservice.cartAllDelete(userId);		
+				
+	}//end list
+	
+	
+	
+	
+	//단일 결제페이지 불러오기
+	@GetMapping("/paylist2")
+	// model 과 modelAndView 와 차이점은 리턴값을 어떻게 표기하냐의 차이가 있다!
+	// 강의 시간의 배운 방식과 표기법은 model이므로 헷갈리지않게 model 사용!
+	public void list2(HttpSession session, Model model, Model model2, Integer productId, HttpServletRequest request) {
+		logger.info("-----------paylist2()호출-----------");
+//		String userId=(String)session.getAttribute("userId");
+		String userId="1";
+		
+		ProductVO vo= payservice.detailProduct(productId);	
+				
+		model.addAttribute("vo", vo);
 		
 	}//end list
+	
+	
 	
 	@GetMapping("/display")
 	public ResponseEntity<byte[]>display(String fileName)throws Exception{

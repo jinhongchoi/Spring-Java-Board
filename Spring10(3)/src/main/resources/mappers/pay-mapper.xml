@@ -5,16 +5,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="edu.spring.ex10.PayMapper">
 
-	<!--여러개의 insert 있을 시구분하기 위해 id 필요  -->
+	<!-- 단일결제  -->
 	 <insert id="insert">  
-		insert into ${tbl_pay}(${payPrice}, ${userId}, ${userTell}, ${productId}
+		insert into ${tbl_paydetail}(${paydetailNum}, ${cartId}, ${productId}, ${amount}
 		) values(
-			#{payPrice}, #{userId}, #{userTell}, #{productId}
+			seq_paydetail.nextval, #{cartId}, #{productId}, #{amount}
 		)
+	 </insert>  
+	 
+	 <!-- 장바구니 결제  -->
+	 <insert id="insertDetail">  
+		insert into ${tbl_paydetail}(${paydetailNum}, ${cartId}, ${productId}, ${amount}
+		) select seq_paydetail.nextval, #{cartId}, ${productId}, ${amount} 
+			from tbl_cart		
 	 </insert> 
+	
 	 
 	 <!-- 결제 목록  -->
-	 <select id="listPay" resultType="PayVO">
+<!-- 	 <select id="listPay" resultType="PayVO">
  		select
 	 		a.pay_id as payId,
 	 		a.user_id as userId,
@@ -30,7 +38,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 		and p.product_id = a.product_id
 	 		and a.user_id = #{userId} 	
 	 	order by a.pay_id
+	 </select> -->
+	 
+	 <!-- 장바구니 결제 목록  -->
+	 <select id="lisePayDetail" resultType="PayDetailVO">
+	 	select	 		
+	 		m.user_id as userId,
+	 		p.product_id as productId,
+	 		m.user_name as userName,	 		
+	 		p.product_name as productName,
+	 		p.product_url as productUrl,	 		
+	 		p.product_price as productPrice,            
+            d.paydetail_num as paydetail_num,
+            d.amount,
+            (product_price * amount) money
+	 	from 
+	 		tbl_member m, tbl_product p, tbl_paydetail d 
+	 	where  
+            p.product_id = d.product_id
+	 		and m.user_id = #{userId}
+	 	order by d.paydetail_num desc
 	 </select>
+	 
 	 
 	 <!-- 장바구니 목록  -->
 	 <select id="listCart" resultType="CartVO">
@@ -64,37 +93,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 	where c.product_id = p.product_id and c.user_id = #{userId}	 	
 	 </select>
 	 
-<!-- 	
-	장바구니 수정 
-	<update id="update">
-		update tbl_cart
-		set ${amount} = #{amount}
-		where ${userId} = #{userId}
-		and ${productId} = #{productId}
-	</update>
-	
-	장바구니 삭제
-	<delete id="delete">
-		delete from ${tbl_cart}
-		where ${cartId} = #{cartId}
-	</delete>
-	
-	장바구니에 동일한 상품 레코드 확인
-	<select id="countCart" resultType="int">
-	 	select count(*)
-	 	from tbl_cart
-	 	where user_id = #{userId}
-	 	and product_id = #{productId}	
+	 <!-- 단일 결제 전체 금액  -->
+	 <select id="sumMoney2" resultType="int">
+	 	select NVL(sum(product_price * amount), 0) payPrice
+	 	from tbl_product p
+	 	where ${productId} = #{productId}	 		 	
 	 </select>
-	
-	장바구니 동일한 상품이 존재하면 수정 
-	<update id="updateCart">
-		update tbl_cart
-		set amount = amount + #{amount}
-		where user_id = #{userId}
-		and product_id = #{productId}
-	</update>
-	 -->
+	 
+	 <!-- 카트 비우기 -->
+	<delete id="cartAllDelete">
+ 		delete tbl_cart
+    	 where ${userId} = #{userId}
+	</delete>
+	 
+
 </mapper>
 
 

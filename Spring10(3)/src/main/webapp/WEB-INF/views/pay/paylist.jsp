@@ -7,6 +7,14 @@
 <html>
 <head>
 
+<!--================================아임포트 결제 api ================================ -->
+<!-- jQuery -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+<!-- iamport.payment.js -->
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+
+
+
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <meta charset="UTF-8">
 <title>상품장바구니 목록</title>
@@ -115,7 +123,7 @@ li{
 						<fmt:formatNumber pattern="###,###,###" value="${vo.productPrice}"/>
 					</td>
 					<td>
-						<input type="number" style="width: 40px" name="amount" value="${vo.amount}" min="1">
+						<input type="number" style="width: 40px" name="amount" value="${vo.amount}" min="1" disabled="disabled">
 						<input type="hidden" name ="productId" value="${vo.productId }">
 					</td>
 					<td style="width: 100px" align="right">
@@ -131,45 +139,7 @@ li{
 				</tr>
 			</table>
 			<input type="hidden" name="count" value="${map.count }">
-			
-		<%-- 	<table border="1">
-				<tr>
-					<th>상품명</th>
-					<th>상품 이미지</th>
-					<th>단가</th>
-					<th>수량</th>
-					<th>금액</th>
-					
-				</tr>
-				
-				<tr>
-					<td>
-						${map2.voName }
-					</td>
-					<td>
-						<img src="display?fileName=/${map2.voUrl }" width="200px" height="150px">
-					</td>
-					<td style="width: 80px" align="right">
-						<fmt:formatNumber pattern="###,###,###" value="${map2.voPrice}"/>
-					</td>
-					<td>
-						<input type="number" style="width: 40px" name="amount" value="${map2.amount}" min="1">
-						<input type="hidden" name ="productId" value="${map2.voId }">
-					</td>
-					<td style="width: 100px" align="right">
-						<fmt:formatNumber pattern="###,###,###" value="${map2.voTotal}"/>
-					</td>
-				</tr>
-				
-				<tr>
-					<td colspan="5" align="right">
-						장바구니 금액 합계:<fmt:formatNumber pattern="###,###,###" value="${map.sumMoney }"/><br>
-						<input type="hidden" name ="payPrice" value="${map.sumMoney }">	
-					</td>
-				</tr>
-			</table> --%>
-			
-			
+						
 		</c:otherwise>
 	</c:choose>
 	
@@ -191,6 +161,7 @@ li{
     <c:forEach var="vo" items="${map.list }" begin="0" end="0">
   	<div class="inputArea" >
    		<label for="">수령인</label>
+   		<input type="hidden" name ="userName" value="${vo.userName }">
    		<input type="text" name="userName" id="userName" required="required"  value="${vo.userName}"/>
   	</div>
   
@@ -229,6 +200,83 @@ li{
 			alert('결제 등록 성공!');
 		}
 	</script>
+	
+	
+	<!-- ================================아임포트 결제 api 
+		->  아직 위에거 값 가져오지 못함 ㅠ
+		================================ -->
+	<script type="text/javascript">
+	  var IMP = window.IMP; // 생략가능
+	  IMP.init('imp17313560'); // <-- 본인 가맹점 식별코드 삽입
+	</script>
+------------------------------------------------	
+	<button onclick="requestPay()">결제하기</button>
+------------------------------------------------
+	<script>
+	function requestPay() {
+  	IMP.init('imp17313560'); //iamport 대신 자신의 "가맹점 식별코드"를 사용
+  	IMP.request_pay({
+    pg: "html5_inicis",
+    pay_method: "card",
+    merchant_uid : 'merchant_'+new Date().getTime(),
+    name : '결제테스트',
+    amount : ${map.sumMoney },
+    buyer_email : 'iamport@siot.do',
+    buyer_name : document.getElementById('userId').value,
+    buyer_tel : document.getElementById('userTell').value,
+    buyer_addr : '서울특별시 강남구 삼성동',
+    buyer_postcode : '123-456'
+  	}, function (rsp) { // callback
+      if (rsp.success) { //결제 성공시
+    	  //location.href = "../pay/paylistDetail"
+          var msg = '결제가 완료되었습니다.';
+      	  var productId = '${vo.productId }';
+      	  var amount = '${vo.amount}';
+      	  var userId = document.getElementById('userId').value;
+      	  var userName =document.getElementById('userName').value;
+      	  var productName = '${vo.productName }';
+      	  var productUrl = '${vo.productUrl }';
+      	  var productPrice = '${vo.productPrice}';
+      	  var money = '${vo.money}';
+      	  var obj= {
+      			  'productId' : productId,
+      			  'amount' : amount,
+      			  'userId' : 1,
+      			  'userName' : userName,
+      			  'productName' : productName,
+      			  'productUrl' : productUrl,
+      			  'productPrice' : productPrice,
+      			  'money' : money
+      	  };
+      	  console.log(obj);
+         
+    	  $.ajax({
+    		  type: 'POST',
+    		  url: '../pays',
+				headers : {
+					'Content-Type' : 'application/json',
+					'X-HTTP-Method-Override' : 'POST'
+				},
+				data : JSON.stringify(obj), // JSON 으로 변환
+				success : function (result, status) {
+					console.log(result);
+					console.log(status);
+					if(result != 0){
+						alert('결제 성공');	
+						location.href = "../pay/paylistDetail"
+					}
+				}
+    	  })
+          
+      } else {// 결제 실패시
+          var msg = '결제에 실패하였습니다.';
+          msg += '에러내용 : ' + rsp.error_msg;
+          alert(msg);
+      }
+      alert(msg);
+  	});
+	}
+</script>
 	
 	
 </body>

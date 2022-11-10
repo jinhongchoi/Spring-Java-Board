@@ -10,7 +10,7 @@ public class PayVO {
 	private String productName; // 상품 이름
 	private int productPrice; // 상품 단가
 	private int amount; // 구매 수량
-	private int payPrice; // 상품 가격
+	private int payPrice; // 상품 가격  -> 다른데 Money =payPrice
 	private int eventId; // 이벤트 번호
 	private String eventName; // 이벤트 이름
 	private int eventPrice; // 이벤트 단가

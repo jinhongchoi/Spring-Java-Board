@@ -9,7 +9,7 @@ public class PageCriteria {
 	
 	public PageCriteria() {
 		this.page = 1;
-		this.numsPerPage = 100; // 한 페이지의 게시글 개수
+		this.numsPerPage = 10; // 한 페이지의 게시글 개수
 	}
 	
 	public PageCriteria(int page, int numsPerPage) {

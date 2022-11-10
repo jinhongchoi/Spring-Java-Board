@@ -4,7 +4,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.annotation.Resource;
@@ -134,6 +136,13 @@ public class ProductController {
 	public void detail(Model model, Integer productId) {
 		logger.info("-----------detail()호출: productId= " + productId +"-----------");
 		ProductVO vo = ProductService.detailProduct(productId);
+//		String userId= "1";
+//		String userName="1";
+//		Map<String, Object>map = new HashMap<String, Object>();
+//		map.put("vo", vo);
+//		map.put("userId", userId);
+//		map.put("userName", userName);
+		
 		model.addAttribute("vo", vo);
 		
 		// model을 이용해 jsp로 보낸다!

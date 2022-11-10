@@ -75,7 +75,9 @@ $("a").click(function() {
 	<h3>상품목록</h3>
 	<h3><a href="../event/eventlist" class="event" style="color: black">EVENT LIST</a></h3>
 	<br>
-	<h3><a href="../pay/paylistDetail" class="event" style="color: black">결제 목록</a></h3>		
+	<h3><a href="../pay/paylistDetail" class="event" style="color: black">결제 목록</a></h3>
+	<br>
+	<h3><a href="../board/list" class="event" style="color: black">공지 게시판</a></h3>		
 		
 	<a href="productregister"><input type="button" value="상품등록하기"></a>
 	<a href="../cart/cartlist"><input type="button" value="장바구니로 가기"> </a>

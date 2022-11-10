@@ -95,6 +95,7 @@ li{
 					<th>금액</th>
 					<th>취소</th>
 				</tr>
+				
 				<c:forEach var="vo" items="${map.list }" varStatus="i">
 				<tr>
 					<td>
@@ -125,7 +126,7 @@ li{
 						get, post 방식 모두에서 잘 작동함!											
 						  -->						
 					</td>
-				</tr>
+				</tr>				
 				</c:forEach>
 				<tr>
 					<td colspan="5" align="right">

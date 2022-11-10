@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import edu.spring.ex10.domain.CartVO;
+import edu.spring.ex10.domain.PayDetailVO;
+import edu.spring.ex10.domain.PayProductVO;
 import edu.spring.ex10.domain.PayVO;
 import edu.spring.ex10.domain.ProductVO;
 
@@ -22,19 +24,34 @@ public class PayDAOImple implements PayDAO {
 	
 	@Autowired
 	private SqlSession sqlSession;
-
+	
+	// 단일 주문 결제
 	@Override
 	public int insert(PayVO vo) {
 		logger.info("----------insert()호출 : vo= "+vo.toString()+"----------");
 		return sqlSession.insert(NAMESPACE+ ".insert", vo);
 	}
-
+	
+	@Override
+	public int insert2(PayDetailVO vo) {
+		logger.info("----------insert2()호출 : vo= "+vo.toString()+"----------");
+		return sqlSession.insert(NAMESPACE+ ".insertDetail", vo);
+	}
+	
 
 	@Override
 	public List<PayVO> listPay(String userId) {
 		logger.info("----------listPay()호출 ----------");
 		userId= "1";
 		return sqlSession.selectList(NAMESPACE+ ".listPay", userId);		
+	}
+	// 장바구니 결제 목록
+	@Override
+	public List<PayDetailVO> listPayDetail(PayDetailVO vo) {
+		// TODO Auto-generated method stub
+		logger.info("----------listPayDetail()호출 ----------");
+		
+		return sqlSession.selectList(NAMESPACE+ ".lisePayDetail", vo);
 	}
 
 	@Override
@@ -59,5 +76,23 @@ public class PayDAOImple implements PayDAO {
 		logger.info(String.valueOf(productId));
 		return sqlSession.selectOne(NAMESPACE + ".detailProduct", productId);
 	}//end detail
+
+
+	@Override
+	public int sumMoney2(int productId) {
+		logger.info("----------sumMoney()호출 ----------");
+		
+		return sqlSession.selectOne(NAMESPACE+ ".sumMoney2", productId);
+	}
+	
+	// 장바구니 삭제
+	@Override
+	public int delete(String userId) {
+		logger.info("----------delete()호출 ----------");
+		userId= "1";
+		return sqlSession.delete(NAMESPACE+ ".cartAllDelete", userId);
+	}
+
+
 
 }
