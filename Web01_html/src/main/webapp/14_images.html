@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Images</title>
+</head>
+<body>
+ <!--
+ * ima 속성
+ - alt(alternate): 이미지 설명
+ - src(source) : 이미지 출처(경로)
+ - style : 이미지 스타일
+ - width height : 이미지 넓이, 높이
+  -->
+  
+  <img alt="프랑스 파리" src="paris.jpg"><br>
+  <!-- 경로: http://localhost:8080/Web01_HTML/paris.jpg -->
+  <!-- 현재 페이지(14_images.html)와 같은 폴더(webapp)에 위치한 이미지 파일 -->
+  
+  <img alt="프랑스 파리" src="images/paris.jpg">
+  <!-- 14파일에 있는게 아닌 서버에 등록된 경로 images폴더에서 불러온거! -->
+  <!-- 서버에 등록되어있는 파일만 가능! -->
+  <!-- 경로: http://localhost:8080/Web01_HTML/images/paris.jpg -->
+  <!-- Web01_HTML/images.paris.jpg == webapp/images/paris.jpg -->
+  <!-- 현재 페이지(14_images.html)와 같은 폴더(webapp)에 
+  밑에 images에 위치한 이미지 파일 -->
+  
+  <img alt="프랑스 파리" src="/images/paris.jpg">
+  <!-- 경로: http://localhost:8080/images/paris.jpg -->
+  <!-- 현재 페이지의 초기 루트(localhost:8080)에 위치한
+  images폴더에 있는 이미지 파일 -->
+  
+  <!-- Front end 쪽은 실수로 인한 시간낭비가 크다!!!!! 꼼꼼히 체크할 것!  -->
+
+</body>
+</html>

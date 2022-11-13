@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Form</title>
+</head>
+<body>
+	<!--
+	
+	여기 중요!!!!!!!!!!!!
+		* Form
+		- form : 데이터를 보낼 패키지를 입력하는 태그(form 안에서만 아래 기능들이 실행됨)
+		- action : 사용자가 보낼 주소(url)를 입력하는 속성
+		- method : 데이터를 전송하는 방식을 결정하는 속성
+		 		1) GET 방식: 사용자가 입력한 데이터를 url 주소와 함께 서버로 전송하는 방식
+		 		2) POST 방식: 사용자가 입력한 데이터를 요청 패킷(request packet)의 body에 
+		 					포함시켜서 외부에 노출되지 않도록 전송하는 방식
+		 					
+		* input : 전송할 데이터를 입력하는 태그
+		- type : 문자열 입력 형식을 결정하는 속성
+		- name: 변수이름을 설정하는 속성
+		
+		name:value -> html에서 데이터를 보내고 꺼내고 하는 방식 
+	  -->
+	  
+	  <!-- GET 방식 -->
+	  <h2>GET 방식 데이터 전송</h2>
+	  <form action="result.html" method="GET">
+	  	성<br><input type="text" name= "firstname"><br>
+	  	이름<br><input type="text" name= "lastname"><br>
+	  	<input type="submit"value="제출">
+	  </form>
+	  
+	  <h2>POST 방식 데이터 전송</h2>
+	  <form action="result.html" method="POST">
+	  	성<br><input type="text" name= "firstname"><br>
+	  	이름<br><input type="text" name= "lastname"><br>
+	  	<input type="submit"value="제출">
+	  </form>
+
+</body>
+</html>
