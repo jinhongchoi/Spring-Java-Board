@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Window</title>
+<script type="text/javascript">
+	window.onload = function() {
+		//window.onload : 
+		// - HTML 문서를 모두 로딩해서 화면(window)의 로딩이 끝났을 때 생성되는 이벤트 ->문서를 모두 읽은 후에 동작!
+		// *이게 없으면 위에다가 var 변수 사용시 선언은 밑에서 되었기 때문에 에러가 난다!
+		// - 모든 자바스크립트 코드는 window.onload 이벤트 리스터(핸들러)
+		//	 함수 내부에서 작성하는 것이 좋음
+		
+		var output1 = document.getElementById('output1');
+		var innerWidth = 100;
+		output1.innerHTML += 'Hello<br>';
+		output1.innerHTML += 'width : ' + window.innerWidth + '<br>';
+		output1.innerHTML += 'width : ' + innerWidth + '<br>';
+	}
+</script>
+</head>
+<body>
+	<h1>자바스크립트 Window 객체</h1>
+	<div id="output1"></div>
+	<div id="output2"></div>
+	<script type="text/javascript">
+		// DOM(Document Object Model): html1, head, body, ...
+		// BOM(Browser Object Model) : Window, Screen, Location, History
+		// window 객체: 브라우저 창 정보를 갖고 있는 객체. HTML 객체의 최상위 객체
+
+		var output2 = document.getElementById('output2');
+		//var innerWidth = 100;//여기서 선언한게 밑에거를 덮어 버림!
+
+		output2.innerHTML = 'width: ' + window.innerWidth;
+		if (window.innerWidth <= 600) {
+			alert('너무 작습니다.');
+
+		}
+	</script>
+
+</body>
+</html>

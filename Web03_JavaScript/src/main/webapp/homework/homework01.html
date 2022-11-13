@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<!--
+	과제 - 사직연산 만들기!
+
+ -->
+
+<title>Homework01</title>
+
+</head>
+<body>
+	<h1>HomeWork 사칙연산 만들기</h1>
+	
+	<input type="number"  id="firstNum"> <!--접근을 위해선 id 를 넣어야 한다!  -->
+	<input type="number"  id="secondNum"><!-- 타입은 어떤 형식일지를 정하는기 때문에 같다!  -->
+	
+	<button onclick="add()">더하기</button>
+	<button onclick="sub()">빼기</button>
+	<button onclick="mol()">곱하기</button>
+	<button onclick="div()">나누기</button>
+	<div id="output"></div>
+	
+	<script type="text/javascript">
+		//input 태그에 입력된 값(value)을 가져오기위해서는 value 속성을 사용
+		
+		var fNum = document.getElementById('firstNum');
+		//document.getElementById('firstNum'); 가 위에 HTML에서 정의한 값을 가져오는 코드
+		var sNum = document.getElementById('secondNum');
+		var output = document.getElementById('output'); //output 도 변수로 해준다!
+		
+		
+		// input 태그와 입력된 값을 가져오기 위해서는
+		// 함수가 실행되는 시점의 value 값을 가져와야 함 -> 그래서 매개변수가 아닌 밑에다 변수 선언해줌
+		function add() {
+			var x=parseInt(fNum.value); //number로 입력하게 해도 parseint로 변환해줘야 함수안에서 계산가능!
+			var y=parseInt(sNum.value);
+			output.innerHTML +=x+'+'+y+'='+ (x+y)+'<br>';
+		}//end add()
+		
+		function sub() {
+			var x=parseInt(fNum.value); //number로 입력하게 해도 parseint로 변환해줘야 함수안에서 계산가능!
+			var y=parseInt(sNum.value);
+			output.innerHTML +=x+'-'+y+'='+ (x-y)+'<br>';
+		}//end add()
+		
+		function mol() {
+			var x=parseInt(fNum.value); //number로 입력하게 해도 parseint로 변환해줘야 함수안에서 계산가능!
+			var y=parseInt(sNum.value);
+			output.innerHTML +=x+'*'+y+'='+ (x*y)+'<br>';
+		}//end add()
+		
+		function div() {
+			var x=parseInt(fNum.value); //number로 입력하게 해도 parseint로 변환해줘야 함수안에서 계산가능!
+			var y=parseInt(sNum.value);
+			output.innerHTML +=x+'/'+y+'='+ (x/y)+'<br>';
+		}//end add()
+				
+	
+	</script>
+	
+</body>
+</html>

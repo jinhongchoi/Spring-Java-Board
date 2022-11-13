@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>homework02</title>
+</head>
+<body>
+	<!-- JavaScript를 이용한 간단한 연락처 프로그램  -->
+
+	<h1>연락처 프로그램</h1>
+
+	이름:
+	<input type="text" id="name">
+	<br> 연락처:
+	<input type="text" id="phone">
+	<br> 아매알:
+	<input type="text" id="email">
+	<br>
+	<button onclick="insert()">입력</button>
+	<button onclick="selectAll()">전체검색</button>
+	인덱스:
+	<input type="text" id="index">
+	<button onclick="deleteByIndex()">삭제</button>
+	<div id="output"></div>
+	
+
+
+	<script type="text/javascript">
+		var contact; // 이름, 연락처, 이메일 값을 객체로 저장 -자바의 VO 개념
+		var contactlist = new Array(); //연락처 객체를 배열로 저장
+
+		var cname = document.getElementById('name');
+		var phone = document.getElementById('phone');
+		var email = document.getElementById('email');
+		var index = document.getElementById('index');
+
+		var output = document.getElementById('output');
+
+
+		function insert() {
+			var nameValue = cname.value;
+			var phoneValue = phone.value;
+			var emailValue = email.value;
+			contact = {
+				name : nameValue,
+				phone : phoneValue,
+				email : emailValue
+			}
+			console.log(contact); //잘 모르거나 안보일 때 로그를 찍어본다.
+			contactlist.push(contact); //배열에 집어넣기!
+			alert('입력완료'); //메시지 띄우는 기능
+		}//end insert()
+		
+		function selectAll() {
+			//output.innerHTML = ''; // div 텍스트 초기화
+			output.innerHTML ='';
+			for(x in contactlist){
+				output.innerHTML += x+'번>'
+				+'이름: ' + contactlist[x].name+'/'
+				+'전화번호: ' + contactlist[x].phone+'/'
+				+'이메일: ' + contactlist[x].email+'<br>' //꺼내는 과정
+			}
+			alert('전체검색 완료'); //메시지 띄우는 기능
+		}//end selectAll()
+		
+		function deleteByIndex() {
+			var indexValue = index.value;
+			contactlist.splice(indexValue,1);//splice(x,1) ->x 뒤로 1개 지울지에 대한 거! 
+			alert('삭제 완료');
+		}
+		
+	</script>
+
+
+</body>
+</html>

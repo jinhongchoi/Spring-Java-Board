@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Event1</title>
+</head>
+<body onload = "//window,alert('반갑습니다.')"><!--"// 큰따옴포 안에 //두개 하면 주석처리됨!"  -->
+	<h1 id= "title" onclick ="test1()" onmouseover="test2()" onmouseout="test3()">
+	자바스크립트 이벤트 핸들링(Event Handling)</h1>
+	
+	
+	
+	
+	<script type="text/javascript">
+		var title = document.getElementById('title');
+		var toggle = true;
+		// 클릭하면 '자바스크립트 이벤트 처리' 라는 글자로 변하고,
+		// 한 번 더 클릭하면 'JavaScript Event Handling'이라고 변하도록 코드 작성
+		// 힌트)toggle
+		
+		function test1() {
+			if(toggle){
+			title.innerHTML="자바스크립트 이벤트 처리";	
+			//<h1> 사이의 글</h1> 사이의 글을 바꾸기 위해서는 innerHTML로 접근한다!!!!!
+				toggle=false;
+				//한 번 더 클릭하면이라는 가정이 있기 때문에 시작과 반대로 돌려주도록 해야 한다!(버튼이랑은 약간 다름!)
+				//(true로 들어왔기때문에 계속 유지 시켜주되면 다른 동작을 할 수가 없음!)
+				//그래야 다시 작동이 가능하도록 변함!
+				
+			
+			}else{
+				title.innerHTML="자바스크립트 이벤트 핸들링(Event Handling)";
+				toggle=true; 
+				//한 번 더 클릭하면이라는 가정이 있기 때문에 시작과 반대로 돌려주도록 해야 한다!
+				//그래야 다시 작동이 가능하도록 변함!
+				
+			}
+			
+		}//end test1()
+		
+		function test2() {
+			title.style.backgroundColor = 'hotpink';
+			title.style.color = 'white';
+		}//end test2()
+		
+		function test3() {
+			title.style.backgroundColor = 'white';
+			title.style.color = 'black';			
+		}//end test3()
+		
+	</script>
+	
+</body>
+</html>

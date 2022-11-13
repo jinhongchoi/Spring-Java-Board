@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Event4</title>
+</head>
+<body>
+	<h1>자바스크립트 이벤트</h1>
+	<input type="text" name="userName" id="userName" autofocus
+		onfocus="changeBgColor(this)" onblur="resetBgColor(this)"
+		onchange="toUpper(this)">
+
+	<select onchange="select(this)">
+		<!--자바 스크립트에서 콤보박스 기능! select option기능!  -->
+		<option value="1">빨강</option>
+		<option value="2">녹색</option>
+		<option value="3">파랑</option>
+	</select>
+
+	<script type="text/javascript">
+		// onfocus :포커스를 받았을 때
+		function changeBgColor(input) {
+			input.style.backgroundColor = 'lightgreen';
+
+		}//end changeBgColor
+
+		// onblur : 포커스를 잃었을 때
+		function resetBgColor(input) {
+			input.style.backgroundColor = 'white';
+
+		}//end resetBgColor
+
+		// onchange : 입력된 내용이 바뀌었을 때(입력 후 엔터나 탭 키를 입력했을 때)
+		function toUpper(input) {
+			input.value = input.value.toUpperCase();
+		}//end toUpper
+
+		// select 옵션을 선택하면 body 색이 글자와 같이 변경되도록
+		function select(sel) {
+			console.log(sel.value);
+			var selected = sel.value;
+			switch (selected) {
+			case '1':
+				document.body.style.backgroundColor = 'red';
+				break;
+			case '2':
+				document.body.style.backgroundColor = 'green';
+				break;
+			case '3':
+				document.body.style.backgroundColor = 'blue';
+				break;
+
+			}
+
+			if (sel.value == "1") {
+				body.style.backgroundColor = 'red';
+			} else if (sel.value == "2") {
+				body.style.backgroundColor = 'green';
+			} else if (sel.value == "3") {
+				body.style.backgroundColor = 'blue';
+			}
+			//위에꺼랑 비교하면서 해보기! 
+			//1. sel.value 로 잡은게 point!
+			//2. body의 색상을 변경한다는건 배경 색을 변경한다는 것! , body는 document의 chileElement라는 것 생각!
+			//3. css나 html의 것을 가져올때는 "document.가져올요소" 이런 형식으로 가져오기! 
+
+		}//end select(sel)
+	</script>
+
+</body>
+</html>

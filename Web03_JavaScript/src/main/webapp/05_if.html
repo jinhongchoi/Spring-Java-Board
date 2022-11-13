@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>If</title>
+</head>
+<body>
+	<h1>JavaScript if문, 비교연산자, 상황연산자</h1>
+	<input type="text" id="input">
+	<button onclick="input()">전송</button>
+	<div id="output"></div>
+
+	<script type="text/javascript">
+		function input() {
+
+			var output = document.getElementById('output');
+			var x = document.getElementById('input').value;
+			//input.value : 입력받은 데이터를 저장
+			console.log(x);
+			console.log(typeof x);
+
+			if (x > 0) {
+				output.InnerHTML += '양수<br>';
+			} else if (x == 0) {
+				output.InnerHTML += '0<br>';
+
+			} else if (x < 0) {
+				output.InnerHTML += '음수<br>';
+			}
+
+			console.log(x);
+			// ==, != : 자동 형 변환이 발생하여 값만 비교(<,>,.. 도 발생)
+			var age = '16';//문자열
+			if (age == 16) {
+				output.InnerHTML += '== 연산자 결과: 참<br>';
+			} else {
+				output.InnerHTML += '== 연산자 결과: 거짓<br>';
+			}
+
+			// ===,!== : 타입과 값을 함께 비교
+			var age = '18';//이미 선언된 변수를 다시 선언해도 에러가 발생하지 않음.
+			if (age === 18) {
+				output.innerHTML += '=== 연산자 결과: 참<br>';
+			} else {
+				output.innerHTML += '=== 연산자 결과: 거짓<br>';
+			}//end 비교연산자
+
+			var x = 100;
+
+			var msg = (x > 0) ? '양수' : '음수';
+			output.innerHTML += msg + '<br>';
+			
+		}//end input문
+	</script>
+
+</body>
+</html>
