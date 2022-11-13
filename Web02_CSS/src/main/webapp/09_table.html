@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Table</title>
+<style type="text/css">
+th,td{
+	border-bottom: 1px solid grey;
+	border-collapse: collapse;
+}
+table {
+	width: 100%;
+}
+thead tr {
+	 background-color: #ebebeb;
+}
+
+/*
+:nth-child(even) - 짝수번 째 자식 요소
+:nth-child(odd) - 홀수번 째 자식 요소
+:nth-child(x) - x번 째 자식 요소
+*/
+
+tbody tr:nth-child(odd) {
+	background: lightgreen;
+}
+</style>
+</head>
+<body>
+	<h1>CSS Table</h1>
+	<table>
+		<caption>급여(단위 : 만원)</caption>
+		<thead>
+			<tr>
+				<th>월</th>
+				<th>급여액</th>
+			</tr>
+			
+		</thead>
+		<tbody>
+			<tr>
+				<td>9월</td>
+				<td>380</td>
+			</tr>
+			<tr>
+				<td>10월</td>
+				<td>380</td>
+			</tr>
+			<tr>
+				<td>11월</td>
+				<td>380</td>
+			</tr>	
+		</tbody>
+		<tfoot>
+			<tr>
+				<td>합계</td>
+				<td>1440</td>
+			</tr>
+		</tfoot>
+		
+	</table>
+</body>
+</html>

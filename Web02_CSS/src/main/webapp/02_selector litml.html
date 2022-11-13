@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style type="text/css">
+
+/* CSS 주석 */
+/*. 1.태그(Tag) 선택자 */
+div{
+   color: crimson;
+}
+
+/* 2. 클래스(Class) 선택자 -> 마지막에 입력한 것이 적용된다!*/
+.c1{
+	color:blue;
+}
+
+.c2{
+	color:green;
+}
+
+/* 3. 아이디(Id) 선택자*/
+#i1{
+	color:purple;
+}
+
+#i2{
+	color:orange;
+}
+
+
+.cls1{
+	border: 2px solid grey;
+}
+
+.cls2{
+	font-size : 150%
+}
+
+
+
+</style>
+
+
+<title>Selector</title>
+</head>
+<body>
+	<!--
+	* CSS Selector : html 요소에 접근하기 위한 특성
+	1. HTML 태그: Element(요소), Tag(태그) 선택자
+	2. Class : HTML태그 안에서 class 속성의 값
+	3. Id: HTML 태그 안에서 id 속성의 값
+	  -->
+	 
+	<h1>CSS Selector</h1>
+	
+	<div>여기는 Division</div>
+	<div class="c1">여기는 클래스 c1 div입니다.</div>
+	<div class="c2">여기는 클래스 c2 div입니다.</div>
+	<div id="i1">여기는 클래스 i1 div입니다.</div>
+	<div id="i2">여기는 클래스 i2 div입니다.</div>
+	<div class="c2" id="i2" id ="i2">여기는 클래스 c2, 아이디 i2 div입니다. </div>
+	<div class="cls1 cls2">여기는 클래스 cls1, cls2 div입니다. </div>
+
+</body>
+</html>
