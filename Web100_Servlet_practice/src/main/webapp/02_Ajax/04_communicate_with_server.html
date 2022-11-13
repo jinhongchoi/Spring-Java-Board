@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>글자 추천</title>
+</head>
+<body>
+
+	<h3>아래에 글을 입력해주세요.</h3>
+	<p>
+	첫글자: <input type="text" id="txt" onkeyup= "showHint(this.value)">
+	 <!-- this 는 자기 자신! -> 여기서는 input Tag  -> this.value 는 input tag에 입력된 값!  -->
+	</p>
+	<p>
+	추천: <span id="txtHint"></span>
+	</p>
+	
+	<script type="text/javascript">
+		function showHint(str) {
+			console.log(str);
+			
+			if(str.length==0){
+				document.getElementById("txtHint").innerHTML = "";
+				return
+			} // 공백일 경우 /썼다 지웠을때!
+			
+			var xhttp=new XMLHttpRequest();  //브라우저 내장 request 객체() -> 통신을 위한 객체
+			xhttp.onreadystatechange = function(){// 값을 보내기 위한 통신객체 생성
+				if(this.readyState ==4 && this.status ==200){
+					document.getElementById("txtHint").innerHTML = this.responseText;// 여기가 다른 페이지에서 받아서 작성되는 부분
+					// this :XMLHttpRequest 
+				}
+			};
+									
+			xhttp.open("GET", "04_get_hint.jsp?q="+str, true);
+			//"04_get_hint.jsp?q="+str
+			//"04_get_hint.jsp?txt=+str" 위에랑 다르다! 
+			// 이부분은 자바 영역이라고 생각하고 str을 입력 받는 그대로 내비두기 위해서 큰따옴표 바깥쪽에다가 변수로 작성!
+			xhttp.send();		
+			// send쪽에 작성하는 것도 똑같음!
+			
+		}
+	</script>
+	
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<title>회원정보</title>
+</head>
+<body>
+	<h2>회원정보</h2>
+	<p id="info"></p>
+	<script type="text/javascript">
+	$(document).ready(function () {
+			// $.get(url, callback)	
+			// $.getJSON(url, data, callback) : 요청한 url의 JSON 데이터를 호출 -> 요청받은 JSON데이터를 자동으로 parse 해준다!
+			// url: 서버의 요청 주소
+			// data : 요청과 함께 보낼 데이터(선택)
+			// callback : JSON 데이터가 리턴됐을때 처리할 함수
+			
+			getData(); // 콜백부분! -> 메소드 갖다쓰는거랑 같은 개념
+			function getData() {
+				$.getJSON( // 이걸 사용하면 자동으로 parsing되어있는 상태로 시작함!
+						'../Info.do', 
+						function(jsonData) {
+							console.log(typeof jsonData); // type 알아보는 콘솔
+							console.log(jsonData);// jsonData : info.do에서 넘어온 JSON데이터
+							var result = '';
+							result += jsonData.userid+"<br>"
+									+jsonData.password+"<br>"
+									+jsonData.email+"<br>";
+							$('#info').html(result);		
+						} //callback부분!(data부분이 생략된거!) -> callback부분은 항상 함수형태로!
+				);// end getJSON()
+			} // end getData()						
+	}); // end document
+	
+	</script>
+	
+</body>
+</html>

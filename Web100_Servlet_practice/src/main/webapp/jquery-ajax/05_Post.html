@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<title>Post Method</title>
+</head>
+<body>
+	<button>HTTP Post Request를 페이지에 보내고, 그 결과를 가져오는 버튼</button>
+	<script type="text/javascript">
+		// $.Post(url, data,callback);
+		$(document).ready(function () {
+			$('button').click(function () {
+				$.post("05_post_test.jsp", //url
+						{
+							name : "mok",
+							city : "인천"  //data
+						},
+						function (data, status) { //callback
+							alert("Data : " + data + "\n status : " + status);
+						});//end post()		
+						
+			}); //end button.click()
+		}); //end document
+		
+	</script>
+</body>
+</html>
