@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" version="4.0">
+  <display-name>Web06_Servlet</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  
+  
+  <!--// 기존의 TestServlet파일에서 web.xml로 정보를 가져온 것!  -->
+  <servlet>
+  	<servlet-name>test</servlet-name>
+  	<servlet-class>edu.web.servlet01.TestServlet</servlet-class>
+  </servlet>
+  
+  <!--// 사용자 이름을 test로 해놓고 url패턴을 매핑(다른 이름으로 바꿔도 같은 페이지가 열림)시킨것! -->  
+  <servlet-mapping>
+  	<servlet-name>test</servlet-name>
+  	<url-pattern>/test2</url-pattern>
+  	<url-pattern>/test3</url-pattern>
+  </servlet-mapping>
+</web-app>
