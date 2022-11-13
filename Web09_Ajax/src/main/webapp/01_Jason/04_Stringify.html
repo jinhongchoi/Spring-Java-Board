@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JSON Stringigy</title>
+</head>
+<body>
+	<h1>JSON Stringify</h1>
+	<div id ="output"></div>
+	<script type="text/javascript">
+		// * JSON.stringify() : 자바스크립트 객체를 문자열로 변환
+		// - 자바스크립트 배열은 JSON 문자열로 변경가능
+		
+		var obj ={
+				name: "mok",
+				age : 20,
+				ciyt : "incheon"				
+		};
+		
+		var myJSON = JSON.stringify(obj); // JSON 객체(문자열)로 변환
+		document.getElementById("output").innerHTML = typeof(myJSON);
+		
+	</script>
+
+</body>
+</html>

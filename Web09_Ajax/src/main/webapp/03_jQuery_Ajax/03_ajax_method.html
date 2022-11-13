@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+</head>
+<body>
+	<div id="output">변경될 텍스트</div>
+	<button>외부 컨텐츠 가져오기</button>
+	<!-- 서버와의 데이터 통신  -->
+	
+	<script type="text/javascript">
+		// * $.ajax()
+		// - ajax load메소드를 간략화한 메소드
+		// - 기본셩태
+		// $.ajax({name:value, name:value, ...});
+		// -name으로 선택할 수 있는 요소
+		//  type : GET or POST
+		//  url : 경로
+		//  data : 보낼 데이터 패키지
+		//  sucess: 호출 성공 시 리턴될 내용
+		
+		
+		// ajax(아이디, 비밀번호)-> servlet(아이디 비밀번호 처리 및 글자 반환)
+		// -> html(반환된 글자 출력)
+		
+		$(document).ready(function (){
+			$('button').click(function () {
+				$.ajax({
+					type : "get",
+					url : "../ajax_test.do",
+					// 안될시 에러메시지 (헤더->General ->request URL 보면서 url 같은지 확인!)
+					// .. 이 상위 폴더라는 의미! -> 메모장(ajax_method (서버와 연결시 주의점!)) 필히 확인
+					// 절대경로는 폴더를 바꾸거나 할때 다바꿔야되서 위험함(잘 안씀)
+					data : {
+						id: "test", // request parameter를 id로 지정
+						pw: "1234" // request parameter를 pw로 지정
+					},
+					success : function(result){
+						$('#output').html(result); //servlet의 output에 내욜을 result에 저장		-> parsing을 하지않았기 때문에 데이터 형태 그대로 나옴!
+						console.log(typeof result);
+					}//success(성공) 하면 돌려받는 구조(콜백)
+				});//end ajax
+			});//end button.click()
+		}); // end document
+		
+	</script>
+	
+</body>
+</html>

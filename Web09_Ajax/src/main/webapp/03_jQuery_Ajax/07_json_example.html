@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<title>로그인 페이지</title>
+</head>
+<body>
+	<h1>로그인 페이지</h1>
+	<!-- 로그인시 입력된 데이터를 서버에 보내서 중복확인 결과를 비동기방식으로 출력!  -->
+	
+	<!--자바스크립트 는 form 형식이 필요 없다!  -->
+	
+	<div>
+		아이디: <input type="text" id="userid"><br>
+		비밀번호: <input type="password" id="password"><br>
+		<button id= "loginBtn">로그인</button>
+	</div>
+	
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$('#loginBtn').click(function () {
+				var userid = $('#userid').val(); 
+				// input의 value는 안에다 써야 한다!
+				// 시점상 눌렀을때 이벤트가 발생하기 때문에 눌렀을때 값을 읽어오는 구조!
+				// id password가 밖에 있으면 눌렀을때 읽어오지 못함! 
+				var password = $('#password').val(); 			
+				console.log("id: "+userid);
+				console.log("password: "+password);
+				
+				var obj ={ //작성한걸 담는 과정
+						'userid' : userid,
+						'password' : password						
+				}
+				
+				
+				// ajax 요청 전송 -> 자바스크립트에서 작성한건 object이기 때문에 
+				// String으로 바꾸기 위해서는 JSON 방식을 사용해야함 -> Stringify
+				$.ajax({
+					type : 'post',
+					url : '../login.do',
+					data: {'obj' : JSON.stringify(obj)}, //JSON으로 변환
+					success: function (result) {
+						// alert(result); 이렇게 하면 그냥 뜨긴뜬다!
+						if(result=='success'){
+							alert('로그인 정보 일치');
+						}
+						console.log(typeof result);
+					}
+					
+				}); //end ajax()
+				
+			});// end loginBtn.click()
+		}); //end document
+	</script>
+			
+</body>
+</html>
+
+
+
+
+
+
+
+
+
