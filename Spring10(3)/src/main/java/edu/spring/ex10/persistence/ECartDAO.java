@@ -9,8 +9,8 @@ public interface ECartDAO {
 	int insert(ECartVO vo);
 	
 	List<ECartVO>listECart(String userId);
-	
-	int delete(int ecartId);
+		
+	int delete(int ecartId, String userId);
 	
 	int countECart(int eventId, String userId);
 	

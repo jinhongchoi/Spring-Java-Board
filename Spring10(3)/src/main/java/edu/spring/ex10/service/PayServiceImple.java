@@ -1,6 +1,8 @@
 package edu.spring.ex10.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import edu.spring.ex10.domain.CartVO;
+import edu.spring.ex10.domain.ECartVO;
 import edu.spring.ex10.domain.PayDetailVO;
 import edu.spring.ex10.domain.PayProductVO;
 import edu.spring.ex10.domain.PayVO;
@@ -83,6 +86,12 @@ public class PayServiceImple implements PayService {
 		return dao.delete(userId);
 	}
 
+	@Override
+	public List<ECartVO> readECart(String userId) {
+		logger.info("---------readECart()»£√‚ ---------");
+		return dao.listECart(userId);
+	}
+	
 
 
 

@@ -35,9 +35,9 @@ public class ECartServiceImple implements ECartService {
 
 	@Override
 	//쿠폰 삭제
-	public int delete(int ecartId) {
+	public int delete(int ecartId, String userId) {
 		logger.info("---------delete()호출 ---------");
-		return dao.delete(ecartId);
+		return dao.delete(ecartId, userId);
 	}
 
 	@Override

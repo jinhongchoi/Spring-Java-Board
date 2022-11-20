@@ -63,8 +63,6 @@ public class CartController {
 	
 			result=cartservice.create(vo);
 		
-			
-			
 		
 		return "redirect:/cart/cartlist";
 		

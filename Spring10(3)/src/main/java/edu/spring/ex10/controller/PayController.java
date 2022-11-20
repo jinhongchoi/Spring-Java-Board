@@ -2,6 +2,8 @@ package edu.spring.ex10.controller;
 
 
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
+
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.HashMap;
@@ -28,11 +30,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 import edu.spring.ex10.domain.CartVO;
+import edu.spring.ex10.domain.ECartVO;
 import edu.spring.ex10.domain.PayDetailVO;
 import edu.spring.ex10.domain.PayProductVO;
 import edu.spring.ex10.domain.PayVO;
 import edu.spring.ex10.domain.ProductVO;
 import edu.spring.ex10.service.CartService;
+import edu.spring.ex10.service.ECartService;
 import edu.spring.ex10.service.PayService;
 import edu.spring.ex10.service.ProductService;
 import edu.spring.ex10.util.MediaUtil;
@@ -51,6 +55,9 @@ public class PayController {
 	
 	@Autowired
 	private PayService payservice;
+	
+	@Autowired
+	private ECartService ecartservice;
 	
 	
 	@Resource(name="uploadPath")
@@ -102,7 +109,7 @@ public class PayController {
 	@GetMapping("/paylist")
 	// model 과 modelAndView 와 차이점은 리턴값을 어떻게 표기하냐의 차이가 있다!
 	// 강의 시간의 배운 방식과 표기법은 model이므로 헷갈리지않게 model 사용!
-	public void list(HttpSession session, Model model, Integer productId, Integer amount) {
+	public void list(HttpSession session, Model model, Integer productId, ECartVO vo2, Integer amount) {
 		logger.info("-----------paylist()호출-----------");
 //		String userId=(String)session.getAttribute("userId");
 		String userId="1";
@@ -113,9 +120,16 @@ public class PayController {
 		map.put("list", list);
 		map.put("count", list.size());
 		map.put("sumMoney", sumMoney);
-				
-		model.addAttribute("map", map);		
 		
+		vo2.setUserId(userId);
+		List<ECartVO>listcoupon = ecartservice.readECart(userId);
+		
+//		int eventPrice=vo2.getEventPrice();		
+//		vo2.setEventPrice(eventPrice);
+//		logger.info(Integer.toString(eventPrice));
+		
+		model.addAttribute("listcoupon", listcoupon);		
+		model.addAttribute("map", map);				
 		
 	}//end list
 	
@@ -129,14 +143,17 @@ public class PayController {
 		String userId="1";
 //		Map<String, Object>map = new HashMap<String, Object>();
 //		List<CartVO>list = payservice.readCart(userId); //장바구니 정보
+		List<ECartVO>list=ecartservice.readECart(userId);
 		
-		vo.setUserId(userId);
 		
+		vo.setUserId(userId);		
 		List<PayDetailVO>listPayDetail=payservice.listPayDetail(vo);
-		model.addAttribute("listPayDetail", listPayDetail);		
+		model.addAttribute("listPayDetail", listPayDetail);
 		
-		payservice.cartAllDelete(userId);		
-				
+		payservice.cartAllDelete(userId);
+//		ecartservice.delete(ecartId, userId);
+		
+		
 	}//end list
 	
 	
@@ -186,6 +203,8 @@ public class PayController {
 		return entity;
 		//http://localhost:8080/ex05/display?fileName=/unnamed.jpg 이거 검색해서 불러와서 있는지 확인
 	}
+	
+
 	
 }
 

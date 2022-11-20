@@ -11,7 +11,7 @@ public interface ECartService {
 	
 	List<ECartVO>readECart(String userId);
 	
-	int delete(int ecartId);
+	int delete(int ecartId, String userId);
 			
 	int countECart(int eventId, String userId);
 

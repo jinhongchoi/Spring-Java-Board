@@ -67,6 +67,13 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		  <property name="boardDateCreated" value="board_date_created"/>
 		  <property name="replyCnt" value="reply_cnt"/>
 		  
+		  <property name="tbl_reply" value="tbl_reply"/>
+		  <property name="replyId" value="reply_id"/>
+		  <property name="boardId" value="board_id"/>
+		  <property name="memberId" value="member_id"/>
+		  <property name="replyContent" value="reply_content"/>
+		  <property name="replyDateCreated" value="reply_date_created"/>
+		  
 	</properties>
 	
 		<!-- underscore 명명법을 camel 명명법으로 변환이 가능하도록 세팅 -->

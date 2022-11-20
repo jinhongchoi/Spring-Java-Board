@@ -64,9 +64,10 @@ public class ECartController {
 	
 	
 	@PostMapping("/delete")
-	public String delete(int ecartId, RedirectAttributes reAttr, Model model) {
+	public String delete(int ecartId, String userId, RedirectAttributes reAttr, Model model) {
 		logger.info("-----------delete()호출: ecartId = "+ecartId+"-----------");
-		int result=ecartservice.delete(ecartId);
+		userId="1";		
+		int result=ecartservice.delete(ecartId, userId);
 		if(result==1) {
 			reAttr.addFlashAttribute("delete_result", "success"); 
 			model.addAttribute("msg", "삭제 성공");

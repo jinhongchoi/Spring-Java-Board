@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import edu.spring.ex10.domain.CartVO;
+import edu.spring.ex10.domain.ECartVO;
 import edu.spring.ex10.domain.PayDetailVO;
 import edu.spring.ex10.domain.PayProductVO;
 import edu.spring.ex10.domain.PayVO;
@@ -53,6 +54,14 @@ public class PayDAOImple implements PayDAO {
 		
 		return sqlSession.selectList(NAMESPACE+ ".lisePayDetail", vo);
 	}
+	
+	// 쿠폰 목록
+	@Override
+	public List<ECartVO> listECart(String userId) {
+		logger.info("----------listCart()호출 ----------");
+		userId= "1";
+		return sqlSession.selectList(NAMESPACE+ ".listECart", userId);
+	}
 
 	@Override
 	public int sumMoney(String userId) {
@@ -92,6 +101,8 @@ public class PayDAOImple implements PayDAO {
 		userId= "1";
 		return sqlSession.delete(NAMESPACE+ ".cartAllDelete", userId);
 	}
+
+	
 
 
 

@@ -27,23 +27,6 @@
 			
 	});//end document
 	
-	
-	
-</script>
-
-<script type="text/javascript">
-	$().ready(function(){
-			
-		$("#checkBoxBtn").click(function(){
-			$("#selectForm").attr({
-				"method" : "post",
-				"action" : "../pay/paylist"
-			});
-			$("#selectForm").submit();
-		});
-	});
-	
-	
 </script>
 
 </head>
@@ -111,8 +94,8 @@ li{
 	<div style="text-align: center;">
 		<div id ="carts"></div>	
 	</div>
+		
 	
-
 	<form name="form1" id="form1" method="post" action="../pay/payinsert" autocomplete="off"> <!-- autocomplete -> 자동완성기능 사용할지 여부  -->
 	<c:choose>
 		<c:when test="${map.count ==0 }">
@@ -128,7 +111,6 @@ li{
 					<th>금액</th>
 					
 				</tr>
-				<c:forEach var="vo" items="${map.list }" varStatus="i">
 				<tr>
 					<td>
 						${vo.productName }
@@ -138,57 +120,29 @@ li{
 					</td>
 					<td style="width: 80px" align="right">
 						<fmt:formatNumber pattern="###,###,###" value="${vo.productPrice}"/>
-					</td>
+					</td>		
 					<td>
-						<input type="number" style="width: 40px" name="amount" value="${vo.amount}" min="1" disabled="disabled">
-						<input type="hidden" name ="productId" value="${vo.productId }">
-					</td>
-					<td style="width: 100px" align="right">
-						<fmt:formatNumber pattern="###,###,###" value="${vo.money}"/>
+					<select id  ="amount">
+						<c:forEach begin="1" end="10" var="i">
+						<option value="${i }">${i }</option>
+						</c:forEach>
+					</select>&nbsp;개
 					</td>
 				</tr>
-				</c:forEach>
-				<tr>						
+				<tr>
 					<td colspan="5" align="right">
 						장바구니 금액 합계:<fmt:formatNumber pattern="###,###,###" value="${map.sumMoney }"/><br>
 						<input type="hidden" name ="payPrice" value="${map.sumMoney }">	
 					</td>
 				</tr>
-				<tr>				
-					<td colspan="5" align="right">
-					쿠폰 선택					
-					<select name="beforeAuth" id="changeTest" onchange="selectBoxChange(this.value)">	
-					<option id = "coupon" value="">쿠폰 선택</option>			
-					<c:forEach items="${listcoupon}" var="listcoupon" >					
-					<option id ="eventPrice" value="${listcoupon.eventPrice}" >${listcoupon.eventPrice}</option>																					
-					</c:forEach>
-					</select>				
-					</td>						
-				</tr>				
-				<tr>
-					<td id="totalPrice" colspan="5" align="right">	
-					<!-- 스크립트 부분에서 계산후 값을 가져다 쓰고 싶으면 id를 지정할 것!
-						그러면 계산된 값이 id에 맞게 들어간다! 
-					 -->										
-						결제 금액:<fmt:formatNumber pattern="###,###,###" value="${map.sumMoney }"/>																						
-					</td>
-				</tr>				
 			</table>
 			<input type="hidden" name="count" value="${map.count }">
-			
-			<script type="text/javascript">		
-			
-	
-			</script>
 						
 		</c:otherwise>
 	</c:choose>
 	
  	<br>
-
-	<br>
- 	<!-- ========================================================================================= -->
-<!-- 	<div class="orderOpen">
+	<div class="orderOpen">
   		<button type="button" id="orderOpen_bnt" class="orderOpen_bnt">주문 정보 입력</button>  		
   		<script>
  			$(".orderOpen_bnt").click(function(){
@@ -196,7 +150,7 @@ li{
   			$(".orderOpen_bnt").slideUp();
  			});      
 		</script>
- 	</div> -->
+ 	</div>
  	<br>
  	<br>
 	
@@ -243,43 +197,20 @@ li{
 		if(result=='success'){
 			alert('결제 등록 성공!');
 		}
-	</script>	
+	</script>
 	
-	<!-- ================================아임포트 결제 api========================================= -->
+	
+	<!-- ================================아임포트 결제 api 
+		->  아직 위에거 값 가져오지 못함 ㅠ
+		================================ -->
 	<script type="text/javascript">
 	  var IMP = window.IMP; // 생략가능
 	  IMP.init('imp17313560'); // <-- 본인 가맹점 식별코드 삽입
 	</script>
 ------------------------------------------------	
-	<button id="requestPay" onclick="requestPay()">결제하기</button>
+	<button onclick="requestPay()">결제하기</button>
 ------------------------------------------------
 	<script>
-	
-	var selectBoxChange = function (value) {
-	// console.log(value);
-	var a = value;
-	console.log(a);
-	sum = ${map.sumMoney };
-	$("#changeTest").val(value);
-	var totalPrice = Number(sum - a);
-	console.log(typeof totalPrice);
-	console.log(totalPrice);
-	$('#totalPrice').text(totalPrice);
-	
-	
-	if(totalPrice >= 100){
-		const target = document.getElementById('requestPay');
-        target.disabled = false;
-    }else{
-        alert('결제 금액은 100원 이상이어야 합니다!');          
-        const target = document.getElementById('requestPay');
-        target.disabled = true;
-        // 그냥 버튼에 활성화 /비활성화만 필요하기 때문에 따로 function 을 수행할 필요가 없다!
-    }
-	
-	
-	}
-	
 	function requestPay() {
   	IMP.init('imp17313560'); //iamport 대신 자신의 "가맹점 식별코드"를 사용
   	IMP.request_pay({
@@ -287,60 +218,22 @@ li{
     pay_method: "card",
     merchant_uid : 'merchant_'+new Date().getTime(),
     name : '결제테스트',
-    amount : $('#totalPrice').text(),
+    amount : ${map.sumMoney },
     buyer_email : 'iamport@siot.do',
-    buyer_name : document.getElementById('userId').value,
-    buyer_tel : document.getElementById('userTell').value,
+    buyer_name : '1',
+    buyer_tel : 'userTell',
     buyer_addr : '서울특별시 강남구 삼성동',
     buyer_postcode : '123-456'
   	}, function (rsp) { // callback
       if (rsp.success) { //결제 성공시
-    	  //location.href = "../pay/paylistDetail"
           var msg = '결제가 완료되었습니다.';
-      	  var productId = '${vo.productId }';
-      	  var amount = '${vo.amount}';
-      	  var userId = document.getElementById('userId').value;
-      	  var userName =document.getElementById('userName').value;
-      	  var productName = '${vo.productName }';
-      	  var productUrl = '${vo.productUrl }';
-      	  var productPrice = '${vo.productPrice}';
-      	  var money = '${vo.money}';
-      	  var obj= {
-      			  'productId' : productId,
-      			  'amount' : amount,
-      			  'userId' : 1,
-      			  'userName' : userName,
-      			  'productName' : productName,
-      			  'productUrl' : productUrl,
-      			  'productPrice' : productPrice,
-      			  'money' : money
-      	  };
-      	  console.log(obj);
-         
-    	  $.ajax({
-    		  type: 'POST',
-    		  url: '../pays',
-				headers : {
-					'Content-Type' : 'application/json',
-					'X-HTTP-Method-Override' : 'POST'
-				},
-				data : JSON.stringify(obj), // JSON 으로 변환
-				success : function (result, status) {
-					console.log(result);
-					console.log(status);
-					if(result != 0){
-						alert('결제 성공');	
-						location.href = "../pay/paylistDetail"
-					}
-				}
-    	  })
-          
+          alert(msg);
+          location.href = "결제 완료 후 이동할 페이지 url"
       } else {// 결제 실패시
           var msg = '결제에 실패하였습니다.';
           msg += '에러내용 : ' + rsp.error_msg;
           alert(msg);
       }
-      alert(msg);
   	});
 	}
 </script>

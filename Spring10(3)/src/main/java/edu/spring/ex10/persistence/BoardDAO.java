@@ -26,4 +26,6 @@ public interface BoardDAO {
 	
 	List<BoardVO> selectByTitleOrContent(String keyword);
 	
+	int updateReplyCnt(int amount, int boardId);
+	
 }

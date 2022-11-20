@@ -14,6 +14,13 @@ table, th, td{
 	text-align: center;
 	
 }
+.addBtn{
+	border-style: solid;
+	border-width: 1px;
+	text-align: center;
+	display :inline-block;
+	margin: auto;
+}
 input{
 	margin-right: 10px;
 }
@@ -83,13 +90,14 @@ $("a").click(function() {
 	<br>	
 	<hr>
 	
-	<table border="1" style="margin-left: auto; margin-right: auto;">
+	<table id="addList" border="1" style="margin-left: auto; margin-right: auto;">
 		<tr>
 			<th>주문번호</th>
 			<th>상품명</th>
 			<th>상품</th>
 			<th>결제금액</th>
 		</tr>
+		<tbody id="listBody">
 		<c:forEach items="${listPayDetail}" var="listPayDetail">
 		
 		<tr>
@@ -107,23 +115,16 @@ $("a").click(function() {
 			</td>
 		</tr>		
 		
-		</c:forEach>
+		</c:forEach> 
+        </tbody>
 	</table>		
-
+	
 </body>
+
+
 </html>
 
-<!-- 
-<input type="hidden" id ="deleteAlert" value="${delete_result}">
-		
-	<script type="text/javascript">
-		var result = $('#deleteAlert').val();
-		if(result=='success'){
-			alert('글 삭제 성공!');
-		}
-	</script>
 
- -->
 
 
 

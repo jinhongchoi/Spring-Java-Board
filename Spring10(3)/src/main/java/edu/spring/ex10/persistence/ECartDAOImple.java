@@ -40,9 +40,12 @@ public class ECartDAOImple implements ECartDAO {
 
 	@Override
 	// 쿠폰 삭제
-	public int delete(int ecartId) {
+	public int delete(int ecartId, String userId) {
 		logger.info("----------delete()호출 ----------");
-		return sqlSession.delete(NAMESPACE+ ".delete", ecartId);
+		Map<String, Object>map = new HashMap<String, Object>();
+		map.put("ecartId", ecartId);
+		map.put("userId", userId);
+		return sqlSession.delete(NAMESPACE+ ".delete", map);
 	}
 
 	@Override

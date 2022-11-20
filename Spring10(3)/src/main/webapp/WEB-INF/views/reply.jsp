@@ -9,46 +9,11 @@
 <head>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <meta charset="UTF-8">
-<title>${vo.boardTitle }</title>
+<title>댓글</title>
 </head>
 <body>
 	
-	<!--앞에서 setattribute 였으니 getattribute 가져오는 것도 생각!   -->
-	
-	<h2>글 보기</h2>
-		
-		<div>
-			<p>글 번호 : ${vo.boardId }</p>
-		</div>
-		
-		<div>
-			<p>제목 : ${vo.boardTitle }</p>
-		</div>
-		<div>
-			<p>작성자 : ${vo.memberId }</p>
-			<p>작성일 : ${vo.boardDateCreated }</p>
-		</div>
-		<div>
-			<textarea rows="20" cols="120"readonly>${vo.boardContent }</textarea>			
-		</div>
-		<a href="list?page=${page }"><input type="button" value="글 목록"></a>
-		<!-- 기존의 페이지로 돌아가게 하기 위해서 ${page }를 사용해준다 -->
-		<a href="update?boardId=${vo.boardId }"><input type="button" value="글 수정"></a>
-		<!-- "update.do?boardId=${vo.boardId }" 이런 형식으로 url을 작성하여 각 번호의 페이지로 이동할 수 있게 만든다!
-			그럼 새로 페이지 만드는게 아닌 알아서 나눠지고 각 번호에 맞게 수정 가능할 수 있게 함!  -> 매개변수 개념이라고 생각!
-			
-			이런식으로 url작성 여러가지로 활용가능!!!
-			 -->
-			 
-			 
-			 
-		<form action="delete" method="POST">
-			<input type="hidden" name="boardId" value= "${vo.boardId }">
-			<input type= "submit" value ="글 삭제">
-		</form>	
-		
-		
-		 <div style="text-align: center;">
+	 <div style="text-align: center;">
          <input type="text" id="memberId">
          <input type="text" id="replyContent">
          <button id="btn_add">작성</button>
@@ -67,7 +32,7 @@
 			getAllReplies();
 			
 			$('#btn_add').click(function () {
-				var boardId = 1; // 게시판 번호 데이터 /boardId 변수는 위에  id = "boardId" 있는걸 보고 작성
+				var boardId = 27; // 게시판 번호 데이터 /boardId 변수는 위에  id = "boardId" 있는걸 보고 작성
 				var memberId = $('#memberId').val(); // 작성자 데이터
 				var replyContent = $('#replyContent').val();// 댓글 내용
 				
@@ -81,7 +46,7 @@
 				// $.ajax로 송수신
 				$.ajax({
 					type: 'POST',
-					url: '../replies',
+					url: 'replies',
 					headers : {
 						'Content-Type' : 'application/json',
 						'X-HTTP-Method-Override' : 'POST'
@@ -103,10 +68,10 @@
 			
 			// 게시판 댓글 전체 가져오기
 			function getAllReplies() {
-				var boardId = 1;
+				var boardId = 27;
 				
 				
-				var url = '../replies/all/'+ boardId;
+				var url = 'replies/all/'+ boardId;
 				//restApi -> requestparameter 안씀! -> json으로 사용/ 그래서 뒤에 쿼리 스트링으로 작성되지 않는다!
 				
 				
@@ -182,7 +147,7 @@
 				// ajax 요청
 				$.ajax({
 					type:'PUT',
-					url : '../replies/'+ replyId,
+					url : 'replies/'+ replyId,
 					headers : {
 						'Content-Type' : 'application/json',
 						'X-HTTP-Method-Override' : 'PUT'
@@ -207,14 +172,14 @@
 				
 				// 선택된 댓글의 replyId, replyContent 값을 저장
 				// prevAll() : 선택된 노드 이전에 있는 모든 형제노드(같은 레벨에 있는 코드)를 접근
-				var boardId = 1;
+				var boardId = 27;
 				var replyId = $(this).prevAll('#replyId').val();
 				console.log(replyId);
 				
 				// ajax 요청
 				$.ajax({
 					type:'DELETE',
-					url : '../replies/'+ replyId,
+					url : 'replies/'+ replyId,
 					headers : {
 						'Content-Type' : 'application/json',
 						'X-HTTP-Method-Override' : 'DELETE'

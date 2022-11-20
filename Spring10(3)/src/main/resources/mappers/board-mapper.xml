@@ -85,6 +85,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	  		order by ${boardId} desc
 	  </select>
 	  
+	  <update id="update_reply_cnt">
+	  	update ${tbl_board}
+	  	set ${replyCnt} = ${replyCnt} + #{amount} 
+	  	where ${boardId} = #{boardId}	  	
+	  </update>
 		
 </mapper>
 

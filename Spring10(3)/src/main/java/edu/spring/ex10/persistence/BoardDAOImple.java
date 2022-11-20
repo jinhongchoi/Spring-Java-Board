@@ -1,6 +1,8 @@
 package edu.spring.ex10.persistence;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
@@ -99,6 +101,16 @@ public class BoardDAOImple implements BoardDAO{ //따로 Query를 상속받지 않는다
 		logger.info("--------select() 호출: keyword"+ keyword+"--------");
 		return sqlSession.selectList(NAMESPACE+ ".select_by_title_content", "%"+keyword+"%");
 	}//end selectByTitleOrContent(String keyword)
+
+	@Override
+	public int updateReplyCnt(int amount, int boardId) {
+		logger.info("--------updateReplyCnt() 호출: boardId"+ boardId+"--------");
+		Map<String, Integer>args = new HashMap<String, Integer>();
+		args.put("amount", amount);
+		args.put("boardId", boardId);
+		
+		return sqlSession.update(NAMESPACE+ ".update_reply_cnt", args);
+	}//end updateReplyCnt
 	
 	
 }//end daoimple

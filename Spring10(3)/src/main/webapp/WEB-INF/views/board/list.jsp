@@ -21,6 +21,11 @@ ul{
 li{
 	display: inline-block;
 } /* 페이징 처리시 디자인  */
+
+a {
+  text-decoration: none;
+  active-color { color:#000; }
+}
 	
 </style>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -29,7 +34,7 @@ li{
 </head>
 <body>
 	<h1>공지 게시판</h1>
-	
+	<h3><a href="../product/productlist" class="event" style="color: black">상품 목록</a></h3>
 	<br>
 	<a href="register"><input type="button" value="글작성"> </a>
 	<!--버튼을 누르면 서버로가는 개념  -->
@@ -90,6 +95,8 @@ li{
 			alert('새 글 작성 성공!');
 		}
 	</script>
+	
+	
 
 
 </body>
