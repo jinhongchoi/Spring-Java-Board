@@ -7,16 +7,121 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+<style type="text/css">
+
+/* ========기본 설정==============  */
+
+body{
+margin: 0;
+font-family: NanumSquareNeo;
+}
+
+table{
+	text-align: center;
+	margin-left: 550px; 
+    margin-right:auto;	
+    border-collapse: collapse;
+    border-radius: 16px;
+}
+
+input{
+	margin-right: 10px;
+}
+.drink{
+  display: inline-flex;
+  justify-content: right;
+  margin-left: 50px;
+  margin-right: 40px;
+  padding-right: 100px;
+  
+}
+.shop{
+  margin-left: 450px;
+  margin-right: 250px;
+}
+
+
+@font-face {
+    font-family: 'NanumSquareNeo';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');
+    
+}
+
+a {
+  text-decoration: none;
+  active-color { color:#000; }  
+}
+
+ul{
+	list-style-type: none;
+}
+
+li{
+	display: inline-block;	
+} 
+
+/*===========타이틀 설정==================  */
+
+.Title{
+  margin: 0;
+  padding: 0;
+  font-size:20px;  
+  margin-left: 550px;
+  margin-right: 350px;
+  text-decoration: none;/*a href 밑줄 등 글자 꾸밈 없음*/
+  padding-top: 50px; 
+}
+
+/* ==============class=".btn-3d.red" 버튼 효과 ============== */
+.btn-3d {
+  position: relative;
+  display: inline-block;
+  font-size: 10px;
+  padding: 5px 18px;
+  color: white;
+  border-radius: 30px;
+  text-align: center;
+  transition: top .01s linear;
+  text-shadow: 0 1px 0 rgba(0,0,0,0.15);
+}
+.btn-3d.red:hover    {background-color: #A52A2A;}
+.btn-3d:active {
+  top: 9px;
+}
+.btn-3d.red {
+  background-color: #e74c3c;
+  box-shadow: 0 0 0 1px #c63702 inset,
+        0 0 0 2px rgba(255,255,255,0.15) inset,
+        0 8px 0 0 #C24032,
+        0 8px 0 1px rgba(0,0,0,0.4),
+        0 8px 8px 1px rgba(0,0,0,0.5);
+}
+.btn-3d.red:active {
+  box-shadow: 0 0 0 1px #c63702 inset,
+        0 0 0 2px rgba(255,255,255,0.15) inset,
+        0 0 0 1px rgba(0,0,0,0.4);
+}
+
+.
+
+</style>
+
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <meta charset="UTF-8">
 <title>${vo.boardTitle }</title>
 </head>
 <body>
 	
-	<!--앞에서 setattribute 였으니 getattribute 가져오는 것도 생각!   -->
 	
+	<%@ include file ="../header.jspf" %>	
+	
+	<div class="Title">
 	<h2>글 보기</h2>
-		
+	</div>
+		<br>
+		<br>
+		<div style="margin-left: 550px; ">
 		<div>
 			<p>글 번호 : ${vo.boardId }</p>
 		</div>
@@ -31,31 +136,46 @@
 		<div>
 			<textarea rows="20" cols="120"readonly>${vo.boardContent }</textarea>			
 		</div>
-		<a href="list?page=${page }"><input type="button" value="글 목록"></a>
+		
+		<ul>
+		<li>
+		<a href="list?page=${page }"><input type="button" value="글 목록" class="btn-3d red"></a>
+		</li>
 		<!-- 기존의 페이지로 돌아가게 하기 위해서 ${page }를 사용해준다 -->
-		<a href="update?boardId=${vo.boardId }"><input type="button" value="글 수정"></a>
+		<li>
+		<a href="update?boardId=${vo.boardId }"><input type="button" value="글 수정" class="btn-3d red"></a>
 		<!-- "update.do?boardId=${vo.boardId }" 이런 형식으로 url을 작성하여 각 번호의 페이지로 이동할 수 있게 만든다!
 			그럼 새로 페이지 만드는게 아닌 알아서 나눠지고 각 번호에 맞게 수정 가능할 수 있게 함!  -> 매개변수 개념이라고 생각!
 			
 			이런식으로 url작성 여러가지로 활용가능!!!
 			 -->
-			 
-			 
-			 
-		<form action="delete" method="POST">
+		</li>
+		<li>			 
+		<form action="delete" method="POST" >
 			<input type="hidden" name="boardId" value= "${vo.boardId }">
-			<input type= "submit" value ="글 삭제">
-		</form>	
+			<input type= "submit" value ="글 삭제" class="btn-3d red">
+		</form>
+		</li>	
+		</ul>
+		</div>
 		
+		<br>
+		<br>
+		<br>
+		<br>
 		
-		 <div style="text-align: center;">
-         <input type="text" id="memberId">
-         <input type="text" id="replyContent">
-         <button id="btn_add">작성</button>
-     </div>
+		<div style="text-align: center;">
+        <input type="text" id="memberId">
+        <input type="text" id="replyContent">          
+        <button id="btn_add" class="btn-3d red">작성</button>                
+     	</div>
+     	 
+     	<br>
+     	<br>
+     	 
 	
 	<div style="text-align: center;">
-		<div id ="replies"></div>	
+		<div id ="replies" ></div>	
 	</div>
 	<div>
 		<br><br><br><br><br><br><br><br><br>
@@ -103,8 +223,7 @@
 			
 			// 게시판 댓글 전체 가져오기
 			function getAllReplies() {
-				var boardId = 1;
-				
+				var boardId = 1;			
 				
 				var url = '../replies/all/'+ boardId;
 				//restApi -> requestparameter 안씀! -> json으로 사용/ 그래서 뒤에 쿼리 스트링으로 작성되지 않는다!
@@ -165,9 +284,7 @@
 				); //end getJSON -> 가져오기만 하기때문에 $getJSON 사용! (ajax도 사용 가능)
 				
 			}// end getAllReplies()
-			
-			
-
+						
 						
 			// 수정 버튼을 클릭하면 선택된 댓글 수정
 			$('#replies').on('click','.reply_item .btn_update', function () { //'.reply_item .btn_update' 중간에 띄어쓰기 꼭 있어야됨
@@ -237,7 +354,13 @@
 		});//end document
 		
 	</script>		
-			
+	
+
+	<br>
+	<br>
+	<br>
+	
+	<%@ include file ="../footer.jspf" %>		
 
 </body>
 </html>

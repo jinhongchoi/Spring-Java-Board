@@ -1,0 +1,157 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    
+
+    
+<style>
+
+.infoContent{		
+	padding-top: 30px;	
+}
+
+/* ==============cgv 이미지 ============== */
+.Title0{
+  font-size:30px; 
+  margin-left: 510px;
+
+}
+
+/* ==============현대카드 이미지 ============== */
+.ad{
+	margin-left: 170px;
+	
+}
+
+/* ==============로그인, 회원가입 등 이미지 및 글자============== */
+.info{
+	padding-left: 30px;
+	text-decoration: none;/*a href 밑줄 등 글자 꾸밈 없음*/
+}
+
+.info span{
+	color: black;
+}
+
+.info span:after{
+   display:block;/*a요소를 블록 요소라고 선언*/  
+   content: '';/*content안은 밑줄 디자인을 위해 비워두세요.*/
+   border-bottom: solid 2px gray;
+   transform: scaleX(0);/*크기를 0으로 줌으로써 평상시엔 밑줄 없음*/
+   transition: transform 250ms ease-in-out; /*변형 방식*/
+}
+
+.info span:hover:after {
+   transform: scaleX(1);/*a 속성에 hover시 after를 기존 크기로 변경*/  
+   
+}
+
+/* ==============영화, 극장, 예매  등 네비 바============== */
+.naviContent{
+	margin-left: 440px;
+	color: black;
+}
+
+.navi{
+	padding-left: 80px;
+	text-decoration: none;/*a href 밑줄 등 글자 꾸밈 없음*/
+	
+}
+
+.navi a{
+ 	color: black;
+ 	font-size: 120%;
+}
+
+.navi a:after{
+   display:block;/*a요소를 블록 요소라고 선언*/  
+   content: '';/*content안은 밑줄 디자인을 위해 비워두세요.*/
+   border-bottom: solid 2px gray;
+   transform: scaleX(0);/*크기를 0으로 줌으로써 평상시엔 밑줄 없음*/
+   transition: transform 250ms ease-in-out; /*변형 방식*/
+}
+
+.navi a:hover:after {
+   transform: scaleX(1);/*a 속성에 hover시 after를 기존 크기로 변경*/  
+   
+}
+
+
+</style>
+
+<div class="infoContent">
+<ul>
+  <li>
+    <div class="Title0">
+    <a href="메인페이지 주소 쓸 것!">
+	<img alt="" src="https://img.cgv.co.kr/R2014/images/common/logo/logoRed.png"  width="117" height="53">
+	</a>
+	</div>
+  </li>
+  <li style="color: #8c8c8c;"> C U L T U R E P L E X </li>
+  
+  <li class="ad">
+  	<div>
+	<img alt="" src="https://img.cgv.co.kr/WingBanner/2022/0303/16462658373950.png" width="136" height="39">
+	</div>
+  </li>   
+  <li class="info">
+  <a href="로그인 페이지 경로 적을 것">
+  	<img alt="로그인" src="https://img.cgv.co.kr/R2014/images/common/ico/loginPassword.png" width="36" height="36">
+  	<br>
+  	<span style="font-size: 12px;">로그인</span>
+  </a> 
+  <li class="info">  
+  <a href="회원가입 페이지 경로 적을 것" style="padding-left: 5px;">
+  	<img alt="회원가입" src="https://img.cgv.co.kr/R2014/images/common/ico/loginJoin.png" width="36" height="36">
+  	<br>
+  	<span style="font-size: 12px;">회원가입</span>
+  </a>
+  </li>
+  <li class="info">
+  <a href="마이 페이지 경로 적을 것" style="padding-left: 8px;">
+  	<img alt="마이 페이지" src="https://img.cgv.co.kr/R2014/images/common/ico/loginMember.png" width="36" height="36">
+  	<br>
+  	<span style="font-size: 12px;">MY PAGE</span>
+  </a>
+  </li>
+  <li class="info">
+  <a href="고객센터 게시판 경로 적을 것">
+  	<img alt="고객센터 게시판" src="	https://img.cgv.co.kr/R2014/images/common/ico/loginCustomer.png" width="36" height="36">
+  	<br>
+  	<span style="font-size: 12px;">게시판</span>
+  </a>	
+  </li>
+</ul>
+</div>
+
+<hr style="background-color: #FFFAFA; height: 1px; ">
+
+<div class="naviContent">
+	<ul>
+	<li class="navi">
+	<a href="영화 페이지 경로">영화</a>
+	</li>
+	<li class="navi">
+	<a href="극장 페이지 경로">극장</a>
+	</li>
+	<li class="navi">
+	<a href="예매페이지 경로">예매</a>
+	</li>
+	<li class="navi">
+	<a href="../product/productlist">스토어</a>
+	</li>
+	<li class="navi">
+	<a href="../event/eventlist">이벤트</a>
+	</li>	
+	</ul>
+</div>
+
+<hr style="background-color: red; height: 1px; margin: 0;">
+
+
+
+
+
+
+
+

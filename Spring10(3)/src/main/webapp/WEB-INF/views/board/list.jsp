@@ -8,23 +8,102 @@
 <head>
 
 <style type="text/css">
-table, th, td{
-	border-style: solid;
-	border-width: 1px;
+/* ========기본 설정==============  */
+
+body{
+margin: 0;
+font-family: NanumSquareNeo;
+}
+
+table{
 	text-align: center;
+	margin-left: 550px; 
+    margin-right:auto;	
+    border-collapse: collapse;
+    border-radius: 16px;
+}
+
+input{
+	margin-right: 10px;
+}
+.drink{
+  display: inline-flex;
+  justify-content: right;
+  margin-left: 50px;
+  margin-right: 40px;
+  padding-right: 100px;
+  
+}
+.shop{
+  margin-left: 450px;
+  margin-right: 250px;
+}
+
+
+@font-face {
+    font-family: 'NanumSquareNeo';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');
+    
+}
+
+a {
+  text-decoration: none;
+  active-color { color:#000; }  
 }
 
 ul{
 	list-style-type: none;
-} /* 페이징 처리시 디자인  */
+}
 
 li{
-	display: inline-block;
-} /* 페이징 처리시 디자인  */
+	display: inline-block;	
+} 
 
-a {
-  text-decoration: none;
-  active-color { color:#000; }
+/*===========타이틀 설정==================  */
+
+.Title{
+  margin: 0;
+  padding: 0;
+  font-size:20px;  
+  margin-left: 550px;
+  margin-right: 350px;
+  text-decoration: none;/*a href 밑줄 등 글자 꾸밈 없음*/
+  padding-top: 50px; 
+}
+
+/* ==============class=".btn-3d.red" 버튼 효과 ============== */
+.btn-3d {
+  position: relative;
+  display: inline-block;
+  font-size: 10px;
+  padding: 5px 18px;
+  color: white;
+  border-radius: 30px;
+  text-align: center;
+  transition: top .01s linear;
+  text-shadow: 0 1px 0 rgba(0,0,0,0.15);
+}
+.btn-3d.red:hover    {background-color: #A52A2A;}
+.btn-3d:active {
+  top: 9px;
+}
+.btn-3d.red {
+  background-color: #e74c3c;
+  box-shadow: 0 0 0 1px #c63702 inset,
+        0 0 0 2px rgba(255,255,255,0.15) inset,
+        0 8px 0 0 #C24032,
+        0 8px 0 1px rgba(0,0,0,0.4),
+        0 8px 8px 1px rgba(0,0,0,0.5);
+}
+.btn-3d.red:active {
+  box-shadow: 0 0 0 1px #c63702 inset,
+        0 0 0 2px rgba(255,255,255,0.15) inset,
+        0 0 0 1px rgba(0,0,0,0.4);
+}
+
+/* ==============페이지 처리 효과============= */
+.page{
+	text-align: center;
 }
 	
 </style>
@@ -33,17 +112,28 @@ a {
 <title>공지 페이지</title>
 </head>
 <body>
+
+	<%@ include file ="../header.jspf" %>
+	
+	
+	<div class="Title">
 	<h1>공지 게시판</h1>
-	<h3><a href="../product/productlist" class="event" style="color: black">상품 목록</a></h3>
+	</div>
+	
 	<br>
-	<a href="register"><input type="button" value="글작성"> </a>
-	<!--버튼을 누르면 서버로가는 개념  -->
-	<hr>
-	<table>	
+	
+	<a href="register" class="btn-3d red" style="margin-left: 550px;">글 작성</a>
+		
+	<br>
+	<br>
+	
+	<hr width="45%" style="margin-left: 550px">	
+	
+	<table border="1" style="border: 1px solid #aaaaaa;" > 	
 		<thead>
 			<tr>
 				<th style="width: 60px">번호</th>
-				<th style="width: 700px">제목</th>
+				<th style="width: 500px">제목</th>
 				<th style="width: 120px">작성자</th>
 				<th style="width: 100px">작성일</th>
 				<th style="width: 60px">댓글수</th>
@@ -69,8 +159,14 @@ a {
 		</tbody>		
 	</table>
 	
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	
 	<!-- 페이징 처리 밑에 태그 나오게~  -->
-	<ul>
+	<ul class="page">
 		<c:if test="${pageMaker.hasPrev }">
 		<li><a href="list?page=${pageMaker.startPageNo-1 }">이전</a></li>		
 		</c:if>
@@ -96,7 +192,13 @@ a {
 		}
 	</script>
 	
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
 	
+	<%@ include file ="../footer.jspf" %>
 
 
 </body>

@@ -11,6 +11,8 @@
 
 <style type="text/css">
 
+/* ========기본 설정==============  */
+
 body{
 margin: 0;
 font-family: NanumSquareNeo;
@@ -57,8 +59,6 @@ ul{
 li{
 	display: inline-block;	
 } 
-
-
 
 
 
@@ -173,6 +173,11 @@ input[type="button"]:hover {
         0 0 0 1px rgba(0,0,0,0.4);
 }
 
+/* ==============검색부분 ============== */
+.form-inline{
+	text-align: center;
+}
+
 	
 </style>
 
@@ -191,7 +196,7 @@ $("a").click(function() {
 
 </head>
 <body>
-	<%@ include file ="header.jspf" %>
+	<%@ include file ="../header.jspf" %>
 	
 	<div class="image">
 	<img alt="Image" src="http://img.cgv.co.kr/GiftStore/Display/PC/15468087168510.jpg" width="900" height="300"> 
@@ -238,6 +243,28 @@ $("a").click(function() {
 		</ul>
 		
 		<hr width="45%" style="margin-left: 550px">
+		
+		<br>
+		<br>
+		
+	<%-- 	<!-- ================검색기능=====================  -->
+		<div class="form-inline">
+		<select id="searchType" name="searchType">
+		<option value="">검색조건</option>
+		<option value="t">제목</option> 
+		<option value="c">내용</option>
+		<option value="w">작성자</option>
+		<option value="tc">제목+내용</option>
+		<option value="all">전체조건</option>
+		</select>
+		<input class="form-control" type="text" id="keyword" name="keyword" 
+		value="${pageMaker.cri.keyword}" placeholder="검색어를 입력하세요"/>
+		<button id="searchBtn" class="btn btn-primary">Search</button>
+		</div>
+		
+		<br>
+		<br>
+		<!-- ================검색기능=====================  --> --%>		
 				
 		<div class="shop">		
 		<c:forEach var="vo" items="${listProduct }" begin="0" end="2">
@@ -379,7 +406,7 @@ $("a").click(function() {
 	</div>
 	
 	
-	<%@ include file ="footer.jspf" %>
+	<%@ include file ="../footer.jspf" %>
 	
 </body>
 </html>

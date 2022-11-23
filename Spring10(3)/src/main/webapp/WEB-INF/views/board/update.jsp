@@ -1,27 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix = "c" uri ="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix = "fmt" uri ="http://java.sun.com/jsp/jstl/fmt" %>
-<!--  fmt 는 포멧 형태 바꾸기 (날짜 같은거) -->    
 <!DOCTYPE html>
 <html>
 <head>
-
 <style type="text/css">
 /* ========기본 설정==============  */
-body{
 
+body{
+margin: 0;
 font-family: NanumSquareNeo;
 }
 
 table{
 	text-align: center;
-	margin-left:auto; 
+	margin-left: 550px; 
     margin-right:auto;	
     border-collapse: collapse;
     border-radius: 16px;
 }
-
 
 input{
 	margin-right: 10px;
@@ -66,17 +62,9 @@ li{
   padding: 0;
   font-size:20px;  
   margin-left: 550px;
-  margin-right: 340px;
+  margin-right: 350px;
   text-decoration: none;/*a href 밑줄 등 글자 꾸밈 없음*/
   padding-top: 50px; 
-}
-
-/* ==============카테고리명 + 더보기 버튼 나열============= */
-.Title2{
-  font-size:15px;  
-  margin-left: 508px;
-  margin-right: 350px;
-  font-weight: 580;
 }
 
 /* ==============class=".btn-3d.red" 버튼 효과 ============== */
@@ -108,80 +96,62 @@ li{
         0 0 0 2px rgba(255,255,255,0.15) inset,
         0 0 0 1px rgba(0,0,0,0.4);
 }
-	
+
 </style>
-
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-
-
-<script>
-$("a").click(function() {
-    toggleClass(".active-color");
-});
-</script>
 
 
 <meta charset="UTF-8">
-<title>결제 목록</title>
-
+<title>글 수정 페이지</title>
 </head>
 <body>
 
 	<%@ include file ="../header.jspf" %>
 
 	<div class="Title">
-	<h3>결제 목록</h3>
+	<h2>글 수정 페이지</h2>
 	</div>
-	<br>
-	
-	<ul class="Title2" >
-	<li style="margin-right: 15px;">
-	<a href="../product/productlist" class="btn-3d red" style="color: white">상품 목록</a>
-	</li>
-	<li style="margin-right: 15px;">
-	<a href="../event/eventlist" class="btn-3d red" style="color: white">EVENT LIST</a>		
-	</li>
-	<li style="margin-right: 15px;">	
-	<a href="../product/productregister" class="btn-3d red">상품등록하기</a>
-	</li>
-	<li style="margin-right: 15px;">
-	<a href="../cart/cartlist" class="btn-3d red">장바구니로 가기 </a>
-	</li>
-	</ul>
 	
 	<br>
-	<hr>
-	
 	<br>
 	
-	<table id="addList" border="1" style="margin-left: auto; margin-right: auto;">
-		<tr>
-			<th>주문번호</th>
-			<th>상품명</th>
-			<th>상품</th>
-			<th>결제금액</th>
-		</tr>
-		<tbody id="listBody">
-		<c:forEach items="${listPayDetail}" var="listPayDetail">
+	<div style="margin-left: 550px; ">
+	<form action="update" method="POST">
+	
+		<input type="hidden" name ="page" value = "${page }">
+		<!-- hidden을 사용해서 안보이게 하면서 기존의 전달받은 정보를 가져올때 이런 방식으로 사용  -->
 		
-		<tr>
-			<td>			
-				${listPayDetail.payDetailNum }
-			</td>
-			<td>
-				${listPayDetail.productName }
-			</td>
-			<td>
-				<img src="display?fileName=/${listPayDetail.productUrl }" width="200px" height="150px">
-			</td>
-			<td>
-				${listPayDetail.money }
-			</td>
-		</tr>		
+		<div>
+			<p>글 번호: ${vo.boardId }</p>
+			<input type= "hidden" name="boardId" value="${vo.boardId }" required>
+			
+			<!--hidden을 사용하면 디자인적으로 textfield 를 감출수 있으면서 데이터는 얻어서 보낼 수 있다!  -->
+			
+		</div>
+	
+		<div>
+			<p>제목: </p>
+			<input type= "text" name="boardTitle" value="${vo.boardTitle }">
+		</div>
+		<div>
+			<p>작성자: "${vo.memberId }"</p>
+			<p>작성자: "${vo.boardDateCreated }"</p>
+			<!--fmt 태그 이용해서 포멧 바꾸기  -->
+		</div>
 		
-		</c:forEach> 
-        </tbody>
-	</table>	
+		<div>
+			<p>내용: </p>
+			<textarea rows="20" cols="120" name="boardContent">${vo.boardContent }</textarea>
+			
+		</div>
+		<br>
+		<br>
+		<div>	
+			<input type="submit" value="수정" class="btn-3d red">		
+		</div>
+	
+	</form>
+	</div>
+	
 	
 	<br>
 	<br>
@@ -189,14 +159,7 @@ $("a").click(function() {
 	<br>
 	<br>
 	
-	<%@ include file ="../footer.jspf" %>	
+	<%@ include file ="../footer.jspf" %>
 	
 </body>
-
-
 </html>
-
-
-
-
-
