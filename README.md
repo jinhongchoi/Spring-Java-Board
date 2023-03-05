@@ -1,2 +1,2 @@
-# Spring-Java-Board
+# Board Practice
 Java/Oracle 기반의 Spring FrameWork를 활용한 게시판
